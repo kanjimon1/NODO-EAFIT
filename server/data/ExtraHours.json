@@ -1,0 +1,17 @@
+[
+  {
+    "ExtraHour": 3,
+    "AddedPercentage": 15,
+    "PriceHour": 60
+  },
+  {
+    "ExtraHour": 8,
+    "AddedPercentage": 20,
+    "PriceHour": 70
+  },
+  {
+    "ExtraHour": "5",
+    "AddedPercentage": "10",
+    "PriceHour": "50"
+  }
+]

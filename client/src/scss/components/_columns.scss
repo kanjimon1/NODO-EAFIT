@@ -1,0 +1,50 @@
+@use '../utils' as *;
+
+// components/_columns.scss
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    background-color: $colorwhite;
+    //background-color: $colorbluenavy;
+    height: 250px;
+    color: $colorbluenavy;
+  }
+
+  .column1 {
+    //float: left;
+    width: 100%;
+    padding: 10px;    
+    background-color: #180346;
+    height: 250px;
+    color: $colorwhite;
+  }
+  
+  .column1 img {
+    height: 200px;
+    width: 200px;
+    display: inline-block;
+    margin: 0 2px; /* Adjust as needed to control spacing between images */
+    //vertical-align: top;
+  }
+  
+  .column a {
+    float: none;
+    color: $colorbluenavy;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .column a:hover {
+    background-color: $colorclear;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  

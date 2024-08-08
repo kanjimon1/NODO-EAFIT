@@ -1,0 +1,12 @@
+@use '../utils' as *;
+@use '../utils' as *;
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    @include background-image('../../pics/main-background.png');
+}

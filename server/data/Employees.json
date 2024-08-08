@@ -1,0 +1,26 @@
+[
+      {
+        "EmployeeId": "E001",
+        "EmployeeName": "Alice Smith",
+        "JobName": "Software Engineer",
+        "ExtraHours": 5,
+        "Date": "2024-07-25",
+        "Manager": "John Doe"
+      },
+      {
+        "EmployeeId": "E002",
+        "EmployeeName": "Bob Johnson",
+        "JobName": "Data Analyst",
+        "ExtraHours": 2,
+        "Date": "2024-07-26",
+        "Manager": "Jane Roe"
+      },
+      {
+        "EmployeeId": "E003",
+        "EmployeeName": "Charlie Brown",
+        "JobName": "Project Manager",
+        "ExtraHours": 3,
+        "Date": "2024-07-27",
+        "Manager": "John Doe"
+      }
+]
