@@ -1,0 +1,68 @@
+// components/_columns.scss
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    background-color: $colorwhite;
+    //background-color: $colorbluenavy;
+    height: 250px;
+    color: $colorbluenavy;
+  }
+
+  .column1 {
+    //float: left;
+    width: 100%;
+    padding: 10px;    
+    background-color: #180346;
+    height: 250px;
+    color: $colorwhite;
+  }
+  
+  .column1 img {
+    height: 200px;
+    width: 200px;
+    display: inline-block;
+    margin: 0 2px; /* Adjust as needed to control spacing between images */
+    //vertical-align: top;
+  }
+  
+  .column a {
+    float: none;
+    color: $colorbluenavy;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .column a:hover {
+    background-color: $colorclear;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.navbar {
+    overflow: hidden;
+    background-color: $colorwhite;
+    //background-color: #fff;
+    font-family: Arial, Helvetica, sans-serif; // Puedes mover esto a base si es global
+  }
+  
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: $colorbluenavy;
+    //color: #053473;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  // components/_navbar.scss
+  .navbar a:hover, .dropdown:hover .dropbtn {
+      background-color: $colorclear;
+    }

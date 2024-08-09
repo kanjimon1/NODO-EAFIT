@@ -23,7 +23,7 @@ function App() {
       <footer></footer>
     </div>
   );*/
-  return (
+  /*return (
     <div className="App">
       <header className="App-header">
         <h1>Employee List</h1>
@@ -35,8 +35,8 @@ function App() {
         <p>© 2024 Company Name. All rights reserved.</p>
       </footer>
     </div>
-  );
-  /*return (
+  );*/
+  return (
     <div className="App">
       <header>
         <Navbar />
@@ -48,7 +48,7 @@ function App() {
         <Footer />
       </footer>
     </div>
-  );*/
+  );
 }
 
 export default App

@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+  }
+
+  img{
+    float: left;
+    padding: 0px 0px 0px 15px;
+    margin-top: 12px;
+    margin-left: 100px;
+    height: 15px;
+    width: 120px;
+  }
+
+  // components/_login.scss
+#login {
+  display: flex;
+  //flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  //justify-content: center;
+  width: 450px;
+  min-width: 320px;
+  margin-right: 2.5rem;
+  margin-bottom: 3rem;
+  background-color: #f9f9f9;  
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  padding: 1.8rem 3.1rem;  
+}
+
+.sr-only{
+  font-size: 50px;
+  color: #ffffff;
+}
+
+#login img {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login h2 {
+  margin-top: 0; /* Remove any default margin-top to avoid unnecessary spacing */
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#login span,
+#login a {
+  margin-top: 10px; /* Adjust the margin as needed */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#loginForm label {
+  /*margin-top: 15px;
+  margin-bottom: 10px;*/
+  font-size: 16px;
+  //font-weight: bold;
+  margin-left: 10;
+}
+
+#loginForm input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#loginForm input:hover {
+  background-color: #e6f7ff; /* Light blue */
+}
+
+#loginForm button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#loginForm button:hover {
+  background-color: #007bff;
+}
+
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    //@include background-image('../../assets/main-background.png');
+}
+
+//@mixin background-image($background-image-url){
+   /* @mixin background-image('../../assets/main-background.png'){
+    background-image: url('../../assets/main-background.png');
+    background-repeat: round;
+    background-size: 100% 100%;
+    background-repeat: repeat;
+}*/
+
+@media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      height: auto;
+    }
+  }
