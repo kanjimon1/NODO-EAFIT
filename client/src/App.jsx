@@ -47,8 +47,8 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<ExtraHours />} />
-            {/*<Route path="/" element={<Login />} />*/}
+            {/*<Route path="/" element={<ExtraHours />} />*/}
+            <Route path="/" element={<Login />} />
             <Route path="/employees" element={<EmployeesGrid />} />
           </Routes>
         </main>

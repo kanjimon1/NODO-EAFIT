@@ -28,5 +28,10 @@
     "extrahour": "7",
     "addpercentage": "7",
     "addpricehour": "28"
+  },
+  {
+    "extrahour": "22",
+    "addpercentage": "22",
+    "addpricehour": "22"
   }
 ]

@@ -50,7 +50,7 @@ export const ExtraHours = () => {
   return (
     <div id="wrapper">
       <h1 className="sr-only">Add Extra Hour</h1>
-      <div id="login">        
+      {/*<div id="login">*/}
         <img alt="Amadeus" src={logo} />
         <h2>Add Extra Hour</h2>
         <form id="loginForm" onSubmit={handleSubmit}>
@@ -84,8 +84,10 @@ export const ExtraHours = () => {
           <button type="submit">Send</button>
         </form>
         {/*<a href="hotologin">How to login</a>
-        <a href="hotologin">Forgot your password</a>*/}
-      </div>
-    </div>    
+        <a href="hotologin">Forgot your password</a>
+      </div>*/}
+    </div>
   );
 };
+
+export default ExtraHours;
