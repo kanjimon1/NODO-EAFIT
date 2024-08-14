@@ -78,19 +78,22 @@ const deleteExtraHours = async (req, res) => {
 
 const addExtraHours = async (req, res) => {
   try {    
-    const { ExtraHour, AddedPercentage, PriceHour } = req.params;
+    //const { ExtraHour, AddedPercentage, PriceHour } = req.params;
+    const { extrahour,addpercentage, addpricehour } = req.body;
 
     let getExtraHoursInfoJSON = [];
 
+    console.log(`estos son los valores del formulario: ${extrahour} ${addpercentage} ${addpricehour}`);
+
     // Validar que el cuerpo de la solicitud tiene los datos necesarios
-    if (!ExtraHour || !AddedPercentage || !PriceHour) {
+    if (!extrahour || !addpercentage || !addpricehour) {
         return res.status(400).send({ error: 'Missing required fields' });
       }
 
     getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
       // Comprobar si el ID ya existe
-    const existingRecord = getExtraHoursInfoJSON.find(record => record.ExtraHour === ExtraHour);
+    const existingRecord = getExtraHoursInfoJSON.find(record => record.ExtraHour === extrahour);
 
     if (existingRecord) {
         return res.status(400).send({ error: 'Record with this ID already exists' });
@@ -100,7 +103,7 @@ const addExtraHours = async (req, res) => {
 
     // Crear un nuevo registro
     //const newRecord = { id: newId, ExtraHour, AddedPercentage, PriceHour };
-    const newRecord = { ExtraHour, AddedPercentage, PriceHour };   
+    const newRecord = { extrahour,addpercentage, addpricehour };   
     
     // Agregar el nuevo registro al array    
     getExtraHoursInfoJSON.push(newRecord);
@@ -108,7 +111,8 @@ const addExtraHours = async (req, res) => {
     // Escribir los datos actualizados de vuelta en el archivo
     await updateJsonFile('./data/ExtraHours.json', getExtraHoursInfoJSON);
     
-    res.status(201).send({ message: 'Record added successfully', record: newRecord });
+    //res.status(200).send({ message: 'Record added successfully', record: newRecord });
+    res.status(200).json({ success: true, message: "OK", record: newRecord });
 
   } catch (error) {
     res.status(400);

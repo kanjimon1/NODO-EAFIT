@@ -6,6 +6,7 @@ const getEmployeesInfo = async (req, res) => {
         let employeesInfoJSON = [];
         //employeesInfoJSON = await (process.env.JSON_DIR_EMPLOYEES_INFO);
         employeesInfoJSON = await readJsonFile('./data/Employees.json');
+        console.log(employeesInfoJSON);
         res.status(200).send(employeesInfoJSON);     
     } catch (error) {
         res.status(400);

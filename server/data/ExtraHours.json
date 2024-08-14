@@ -13,5 +13,20 @@
     "ExtraHour": "5",
     "AddedPercentage": "10",
     "PriceHour": "50"
+  },
+  {
+    "extrahour": "4",
+    "addpercentage": "8",
+    "addpricehour": "30"
+  },
+  {
+    "extrahour": "6",
+    "addpercentage": "9",
+    "addpricehour": "29"
+  },
+  {
+    "extrahour": "7",
+    "addpercentage": "7",
+    "addpricehour": "28"
   }
 ]

@@ -1,0 +1,694 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    height: auto;
+  }
+}
+body {
+  margin: 0;
+}
+
+img {
+  float: left;
+  padding: 0px 0px 0px 15px;
+  margin-top: 12px;
+  margin-left: 100px;
+  height: 15px;
+  width: 120px;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 450px;
+  min-width: 320px;
+  margin-right: 2.5rem;
+  margin-bottom: 3rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  padding: 1.8rem 3.1rem;
+}
+
+.sr-only {
+  font-size: 50px;
+  color: #ffffff;
+}
+
+#login img {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login h2 {
+  margin-top: 0; /* Remove any default margin-top to avoid unnecessary spacing */
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#login span,
+#login a {
+  margin-top: 10px; /* Adjust the margin as needed */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#loginForm label {
+  /*margin-top: 15px;
+  margin-bottom: 10px;*/
+  font-size: 16px;
+  margin-left: 10;
+}
+
+#loginForm input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#loginForm input:hover {
+  background-color: #e6f7ff; /* Light blue */
+}
+
+#loginForm button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#loginForm button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #180346;
+  text-align: center;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #053473;
+}
+
+.icon-airplane::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon.airport::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-corporation::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-hospitality::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-travelsellers::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-support::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-training::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-network::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-partner::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-market::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-blog::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-center::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-about::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-innovation::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-news::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-good::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+.icon-career::before {
+  content: "✈"; /* Unicode for house icon */
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    height: auto;
+  }
+}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+}
+
+img {
+  float: left;
+  padding: 0px 0px 0px 15px;
+  margin-top: 12px;
+  margin-left: 100px;
+  height: 15px;
+  width: 120px;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 450px;
+  min-width: 320px;
+  margin-right: 2.5rem;
+  margin-bottom: 3rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  padding: 1.8rem 3.1rem;
+}
+
+.sr-only {
+  font-size: 50px;
+  color: #ffffff;
+}
+
+#login img {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login h2 {
+  margin-top: 0; /* Remove any default margin-top to avoid unnecessary spacing */
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#login span,
+#login a {
+  margin-top: 10px; /* Adjust the margin as needed */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#loginForm label {
+  /*margin-top: 15px;
+  margin-bottom: 10px;*/
+  font-size: 16px;
+  margin-left: 10;
+}
+
+#loginForm input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#loginForm input:hover {
+  background-color: #e6f7ff; /* Light blue */
+}
+
+#loginForm button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#loginForm button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #180346;
+  text-align: center;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #053473;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: #053473;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #E5EFFC;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #053473;
+  padding: 14px 16px;
+  background-color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  width: 100%;
+  left: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content .header {
+  background: #ffffff;
+  padding: 14px 16px;
+  color: #053473;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  background-color: #ffffff;
+  height: 250px;
+  color: #053473;
+}
+
+.column1 {
+  width: 100%;
+  padding: 10px;
+  background-color: #180346;
+  height: 250px;
+  color: #ffffff;
+}
+
+.column1 img {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+  margin: 0 2px; /* Adjust as needed to control spacing between images */
+}
+
+.column a {
+  float: none;
+  color: #053473;
+  padding: 14px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.column a:hover {
+  background-color: #E5EFFC;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    height: auto;
+  }
+}
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+  background-image: url("../../pics/main-background.png");
+  background-repeat: round;
+  background-size: 100% 100%;
+  background-repeat: repeat;
+}
+
+main img {
+  text-align: center;
+  height: 70px;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
