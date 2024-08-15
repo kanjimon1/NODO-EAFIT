@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../pics/login-type-amadeus.png';
-//import './Login.css';
+//import '../../scss/';
 
 //esta es una prueba para github
 const Login = () => {

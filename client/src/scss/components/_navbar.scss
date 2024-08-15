@@ -1,5 +1,5 @@
-@use '../utils' as *;
-@use '../base' as *;
+@use '../utils/index' as *;
+@use '../base/index' as *;
 
 .navbar {
   overflow: hidden;

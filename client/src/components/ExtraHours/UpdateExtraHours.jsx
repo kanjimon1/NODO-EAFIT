@@ -5,12 +5,12 @@ import logo from '../../pics/login-type-amadeus.png';
 
 export const UpdateExtraHours = () => {
 
-  const [extraHour, setExtrahour] = useState('');
-  const [addPercentage, setPercentage] = useState('');
-  const [addPriceHour, setPricehour] = useState('');
+  const [extrahour, setExtrahour] = useState('');
+  const [addpercentage, setPercentage] = useState('');
+  const [addpricehour, setPricehour] = useState('');
   //const navigate = useNavigate();
 
-  console.log(`valores antes de enviar ${extraHour} ${addPercentage} ${addPriceHour}`);
+  console.log(`valores antes de enviar ${extrahour} ${addpercentage} ${addpricehour}`);
 
   const handleSubmit = async (e) => {
 
@@ -23,7 +23,7 @@ export const UpdateExtraHours = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ extraHour, addPercentage, addPriceHour}),
+        body: JSON.stringify({ extrahour, addpercentage, addpricehour}),
       });
 
       if (!response.ok) {
@@ -49,7 +49,7 @@ export const UpdateExtraHours = () => {
 
   return (
     <div id="wrapper">
-      <h1 className="sr-only">Add Extra Hour</h1>
+      <h1 className="sr-only">Actualizar Hora Extra</h1>
       {/*<div id="login">*/}
         <img alt="Amadeus" src={logo} />
         <h2>Add Extra Hour</h2>
@@ -63,7 +63,7 @@ export const UpdateExtraHours = () => {
             value={extrahour}
             onChange={(e) => setExtrahour(e.target.value)}
             required />          
-          <label htmlFor="AddedPercentage">Add Percentage:</label>
+          <label htmlFor="AddedPercentage">Agregue Porcentaje:</label>
           <input type="text" 
             id="addedpercentage" 
             name="addedpercentage" 
@@ -72,7 +72,7 @@ export const UpdateExtraHours = () => {
             value={addpercentage}
             onChange={(e) => setPercentage(e.target.value)}
             required />
-            <label htmlFor="AddPriceHour">Add Price Hour:</label>
+            <label htmlFor="AddPriceHour">Agregar Valor Hora:</label>
           <input type="text" 
             id="addpricehour"
             name="addpricehour"

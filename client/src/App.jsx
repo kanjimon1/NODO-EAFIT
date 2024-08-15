@@ -8,7 +8,7 @@ import "./css/styles.css";
 
 //import { EmployeesInfo } from './components/EmployeesInfo/EmployeesInfo';
 import { ExtraHours } from './components/ExtraHours/ExtraHours';
-import "./components/ExtraHours/extrahoursStyles.scss";
+//import "./components/ExtraHours/extrahoursStyles.scss";
 import { EmployeesGrid } from "./components/EmployeesInfo/EmployeesGrid";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -47,9 +47,10 @@ function App() {
         </header>
         <main>
           <Routes>
-            {/*<Route path="/" element={<ExtraHours />} />*/}
+            {/**/}
             <Route path="/" element={<Login />} />
             <Route path="/employees" element={<EmployeesGrid />} />
+            <Route path="/addExtraHours" element={<ExtraHours />}/>
           </Routes>
         </main>
         <footer>

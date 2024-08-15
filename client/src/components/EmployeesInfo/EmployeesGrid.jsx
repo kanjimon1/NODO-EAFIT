@@ -4,10 +4,11 @@ import logo from "../../pics/login-type-amadeus.png";
 import Employees from "./Employees";
 import { Table, Button, Modal } from 'antd';
 import ExtraHours from '../ExtraHours/ExtraHours';
+import UpdateExtraHours from "../ExtraHours/UpdateExtraHours";
 
 export const EmployeesGrid = () => {
+  
   const [employees, setEmployees] = useState([]);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null); 
 
@@ -34,24 +35,56 @@ export const EmployeesGrid = () => {
   // Define columns for the table
   const columns = [
     {
-      title: "Employee ID",
+      title: "Cédula",
       dataIndex: "EmployeeId",
       key: "EmployeeId",
     },
     {
-      title: "Employee Name",
+      title: "Nombre Empleado",
       dataIndex: "EmployeeName",
       key: "EmployeeName",
     },
     {
-      title: 'Update',
-      key: 'update',
+      title: "Cargo",
+      dataIndex: "JobName",
+      key: "JobName",
+    },
+    {
+      title: "Horas Extras",
+      dataIndex: "ExtraHours",
+      key: "ExtraHours",
+    },
+    {
+      title: "Fecha",
+      dataIndex: "Date",
+      key: "Date",
+    },
+    {
+      title: "Supervisor",
+      dataIndex: "Manager",
+      key: "Manager",
+    },
+    {
+      title: 'Actualizar',
+      key: 'Actualizar',
       render: (text, record) => (
         <Button
           type="link"
           onClick={() => handleUpdateClick(record)}
         >
-          Update
+          Actualizar
+        </Button>
+      ),
+    },
+    {
+      title: 'Eliminar',
+      key: 'Eliminar',
+      render: (text, record) => (
+        <Button
+          type="link"
+          onClick={() => handleDeleteClick(record)}
+        >
+          Eliminar
         </Button>
       ),
     },
@@ -60,6 +93,12 @@ export const EmployeesGrid = () => {
 
   // Handle modal visibility
   const handleUpdateClick = (employee) => {
+    setCurrentEmployee(employee);
+    setIsModalVisible(true);
+  };
+
+  // Handle modal visibility
+  const handleDeleteClick = (employee) => {
     setCurrentEmployee(employee);
     setIsModalVisible(true);
   };
@@ -81,16 +120,17 @@ export const EmployeesGrid = () => {
 
   return (
     <div className="employees-grid">
+      
       <Employees />
 
       {/* Button to trigger the modal */}
       <Button type="primary" onClick={showModal} style={{ marginBottom: '16px' }}>
-        Add Extra Hours
+        Añadir horas extra
       </Button>
 
       {/* Modal displaying the ExtraHours component */}
       <Modal
-        title="Add Extra Hours"
+        title="Añadir Hora Extra"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -111,14 +151,16 @@ export const EmployeesGrid = () => {
       )}
       {/* Modal displaying the ExtraHours component */}
       <Modal
-        title="Update Employee Extra Hours"
+        title="Actualizar Hora Extra Empleado"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        
         footer={null} // Optional: Remove default footer if you want custom buttons
       >
-        <ExtraHours employee={currentEmployee} /> {/* Pass the employee data to the form */}
+
+        {currentEmployee && (
+          <UpdateExtraHours employee={currentEmployee} />
+        )}
       </Modal>
     </div>
   );
