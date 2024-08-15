@@ -16,18 +16,19 @@ const getExtraHoursInfo = async (req, res) => {
 const updateExtraHours = async (req, res) => {
   try {   
 
-    const { ExtraHour, AddedPercentage, PriceHour } = req.params;
+    //const { ExtraHour, AddedPercentage, PriceHour } = req.params;
+    const { extraHour, addedPercentage, priceHour } = req.body;
 
     let getExtraHoursInfoJSON = [];
 
-    const extraHour = parseInt(ExtraHour, 10);
-    const addedPercentage = parseFloat(AddedPercentage);
-    const priceHour = parseFloat(PriceHour);
+    const ExtraHour = parseInt(extraHour, 10);
+    const AddedPercentage = parseFloat(addedPercentage);
+    const PriceHour = parseFloat(priceHour);
     
     getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
     const hourFound = getExtraHoursInfoJSON.find((updateExtraHours) => {
-      return updateExtraHours.ExtraHour === extraHour;
+      return updateExtraHours.extraHour === ExtraHour;
     });
 
     if (hourFound === -1) {
@@ -36,8 +37,8 @@ const updateExtraHours = async (req, res) => {
 
     getExtraHoursInfoJSON[hourFound] = {
       ...getExtraHoursInfoJSON[hourFound],
-      AddedPercentage: addedPercentage,
-      PriceHour: priceHour,
+      addedPercentage: AddedPercentage,
+      priceHour: PriceHour,
     };
 
     await updateJsonFile("./data/ExtraHours.json", getExtraHoursInfoJSON);
@@ -70,7 +71,8 @@ const deleteExtraHours = async (req, res) => {
 
     await updateJsonFile("./data/ExtraHours.json", getExtraHoursInfoJSON);
 
-    res.status(200).send({ message: "Record deleted successfully" });
+    //res.status(200).send({ message: "Record deleted successfully" });
+    res.status(200).json({ success: true, message: "OK", record: newRecord });
   } catch (error) {
     res.status(400);
   }

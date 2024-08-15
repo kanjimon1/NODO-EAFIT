@@ -9,6 +9,7 @@ export const EmployeesGrid = () => {
   const [employees, setEmployees] = useState([]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState(null); 
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -42,29 +43,41 @@ export const EmployeesGrid = () => {
       dataIndex: "EmployeeName",
       key: "EmployeeName",
     },
+    {
+      title: 'Update',
+      key: 'update',
+      render: (text, record) => (
+        <Button
+          type="link"
+          onClick={() => handleUpdateClick(record)}
+        >
+          Update
+        </Button>
+      ),
+    },
     // Add more columns as needed
   ];
 
   // Handle modal visibility
-  const showModal = () => {
+  const handleUpdateClick = (employee) => {
+    setCurrentEmployee(employee);
     setIsModalVisible(true);
+  };
+
+  // Handle modal visibility
+  const showModal = () => {
+    setIsModalVisible(true);    
   };
 
   const handleOk = () => {
     setIsModalVisible(false);
+    setCurrentEmployee(null);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setCurrentEmployee(null);
   };
-
-  // Handle form submission
-  {/*const onFinish = (values) => {
-    console.log('Form values:', values);
-    // Here you can add the logic to update the employees list or send the data to an API
-    setIsModalVisible(false);
-  };*/}
-
 
   return (
     <div className="employees-grid">
@@ -91,11 +104,22 @@ export const EmployeesGrid = () => {
           columns={columns}
           dataSource={employees}
           rowKey="EmployeeId" // Specify the unique key for each row
-          pagination={false} // You can enable pagination if needed
+          pagination={true} // You can enable pagination if needed
         />
       ) : (
         <p>No employees found.</p>
       )}
+      {/* Modal displaying the ExtraHours component */}
+      <Modal
+        title="Update Employee Extra Hours"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        
+        footer={null} // Optional: Remove default footer if you want custom buttons
+      >
+        <ExtraHours employee={currentEmployee} /> {/* Pass the employee data to the form */}
+      </Modal>
     </div>
   );
 };
