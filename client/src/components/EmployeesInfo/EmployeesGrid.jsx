@@ -9,8 +9,12 @@ import UpdateExtraHours from "../ExtraHours/UpdateExtraHours";
 export const EmployeesGrid = () => {
   
   const [employees, setEmployees] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [currentEmployee, setCurrentEmployee] = useState(null); 
+  //const [isModalVisible, setIsModalVisible] = useState(false);
+  //const [currentEmployee, setCurrentEmployee] = useState(null); 
+
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState(null);
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -91,31 +95,29 @@ export const EmployeesGrid = () => {
     // Add more columns as needed
   ];
 
-  // Handle modal visibility
-  const handleUpdateClick = (employee) => {
+  const showAddModal = () => {
+    setIsAddModalVisible(true);
+  };
+  
+  const handleAddOk = () => {
+    setIsAddModalVisible(false);
+  };
+  
+  const handleAddCancel = () => {
+    setIsAddModalVisible(false);
+  };
+  
+  const showUpdateModal = (employee) => {
     setCurrentEmployee(employee);
-    setIsModalVisible(true);
+    setIsUpdateModalVisible(true);
   };
-
-  // Handle modal visibility
-  const handleDeleteClick = (employee) => {
-    setCurrentEmployee(employee);
-    setIsModalVisible(true);
+  
+  const handleUpdateOk = () => {
+    setIsUpdateModalVisible(false);
   };
-
-  // Handle modal visibility
-  const showModal = () => {
-    setIsModalVisible(true);    
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-    setCurrentEmployee(null);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setCurrentEmployee(null);
+  
+  const handleUpdateCancel = () => {
+    setIsUpdateModalVisible(false);
   };
 
   return (
@@ -124,16 +126,16 @@ export const EmployeesGrid = () => {
       <Employees />
 
       {/* Button to trigger the modal */}
-      <Button type="primary" onClick={showModal} style={{ marginBottom: '16px' }}>
+      <Button type="primary" onClick={showAddModal} style={{ marginBottom: '16px' }}>
         Añadir horas extra
       </Button>
 
       {/* Modal displaying the ExtraHours component */}
       <Modal
         title="Añadir Hora Extra"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        visible={isAddModalVisible}
+        onOk={handleAddOk}
+        onCancel={handleAddCancel}
         footer={null} // Optional: Remove default footer if you want custom buttons
       >
         <ExtraHours /> {/* Render the ExtraHours form here */}
@@ -145,6 +147,9 @@ export const EmployeesGrid = () => {
           dataSource={employees}
           rowKey="EmployeeId" // Specify the unique key for each row
           pagination={true} // You can enable pagination if needed
+          onRow={(record) => ({
+            onClick: () => showUpdateModal(record),
+          })}
         />
       ) : (
         <p>No employees found.</p>
@@ -152,9 +157,9 @@ export const EmployeesGrid = () => {
       {/* Modal displaying the ExtraHours component */}
       <Modal
         title="Actualizar Hora Extra Empleado"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        visible={isUpdateModalVisible}
+        onOk={handleUpdateOk}
+        onCancel={handleUpdateCancel}
         footer={null} // Optional: Remove default footer if you want custom buttons
       >
 

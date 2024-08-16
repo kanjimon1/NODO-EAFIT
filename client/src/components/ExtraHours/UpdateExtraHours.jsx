@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 //import { useNavigate } from 'react-router-dom';
 import logo from '../../pics/login-type-amadeus.png';
 
-export const UpdateExtraHours = () => {
+export const UpdateExtraHours = (EmployeeId) => {
 
   const [extrahour, setExtrahour] = useState('');
   const [addpercentage, setPercentage] = useState('');

@@ -1,0 +1,25 @@
+#horasExtrasForm {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    gap: 20px; /* Adjust the gap between sections */
+  }
+  
+  .search {
+    grid-row: 1;
+    display: flex;
+    justify-content: center; /* Center the search input */
+  }
+  
+  .middle {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items: center; /* Align items in the middle */
+  }
+  
+  .textarea {
+    grid-row: 3;
+    display: flex;
+    justify-content: center; /* Center the textarea */
+  }
