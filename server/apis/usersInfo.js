@@ -32,6 +32,7 @@ const getUsersInfo = async (req, res) => {
     }
 };
 
+
 module.exports = {
     getUsersInfo,
 };

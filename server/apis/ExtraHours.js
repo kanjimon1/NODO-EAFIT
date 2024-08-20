@@ -81,31 +81,44 @@ const deleteExtraHours = async (req, res) => {
 const addExtraHours = async (req, res) => {
   try {    
     //const { ExtraHour, AddedPercentage, PriceHour } = req.params;
-    const { extrahour,addpercentage, addpricehour } = req.body;
+    //const { extrahour,addpercentage, addpricehour } = req.body;
+    //const { date,hora, extrahour, Obervaciones } = req.body;
+
+    const { EmployeeId,
+          EmployeeName,
+          JobName,
+          extraHours,
+          Date,
+          Manager,
+          hora,
+          observaciones } = req.body;
 
     let getExtraHoursInfoJSON = [];
 
-    console.log(`estos son los valores del formulario: ${extrahour} ${addpercentage} ${addpricehour}`);
+    console.log(`estos son los valores del formulario: ${EmployeeId} ${EmployeeName} 
+      ${JobName} ${extraHours} ${Date} ${Manager} ${hora} ${observaciones}`);
 
     // Validar que el cuerpo de la solicitud tiene los datos necesarios
-    if (!extrahour || !addpercentage || !addpricehour) {
-        return res.status(400).send({ error: 'Missing required fields' });
+    if (!EmployeeId || !EmployeeName || !JobName || !extraHours || !Date || !Manager || !hora || !observaciones ) {
+        return res.status(400).send({ error: 'Por favor ingrese todos los siguientes datos' });
       }
 
     getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
       // Comprobar si el ID ya existe
-    const existingRecord = getExtraHoursInfoJSON.find(record => record.ExtraHour === extrahour);
-
-    if (existingRecord) {
-        return res.status(400).send({ error: 'Record with this ID already exists' });
-      }
+    
      // Crear un nuevo ID para el nuevo registro
-     //const newId = getExtraHoursInfoJSON.length > 0 ? getExtraHoursInfoJSON[getExtraHoursInfoJSON.length - 1].id + 1 : 1;
+     const newId = getExtraHoursInfoJSON.length > 0 ? getExtraHoursInfoJSON[getExtraHoursInfoJSON.length - 1].id + 1 : 1;
+
+     const existingRecord = getExtraHoursInfoJSON.find(record => record.id === newId);
+
+     if (existingRecord) {
+         return res.status(400).send({ error: 'Record with this ID already exists' });
+       }
 
     // Crear un nuevo registro
     //const newRecord = { id: newId, ExtraHour, AddedPercentage, PriceHour };
-    const newRecord = { extrahour,addpercentage, addpricehour };   
+    const newRecord = { id: newId, EmployeeId,EmployeeName,JobName,extraHours,Date,Manager,hora,observaciones };
     
     // Agregar el nuevo registro al array    
     getExtraHoursInfoJSON.push(newRecord);

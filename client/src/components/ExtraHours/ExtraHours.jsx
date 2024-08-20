@@ -1,41 +1,67 @@
-//import React from 'react';
 import React, { useState } from "react";
-//import { useNavigate } from 'react-router-dom';
 import logo from "../../pics/login-type-amadeus.png";
-import { Select, DatePicker } from "antd";
-
-import { Input } from "antd";
-//import { AudioOutlined } from icons;
-
-//const { AudioOutlined } = icons;
-//const { Input, Space, Flex } = antd;
+import { Select, DatePicker, Input } from "antd";
 const { Search, TextArea } = Input;
 
-const onChange = (e) => {
-  console.log("Change:", e.target.value);
-};
-
-{/*const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: "#1677ff",
-    }}
-  />
-);*/}
-
-const onSearch = (value, _e, info) => console.log(info?.source, value);
-
 export const ExtraHours = () => {
-  const [extrahour, setExtrahour] = useState("");
-  const [addpercentage, setPercentage] = useState("");
-  const [addpricehour, setPricehour] = useState("");
-  //const navigate = useNavigate();
 
-  console.log(
-    `valores antes de enviar ${extrahour} ${addpercentage} ${addpricehour}`
-  );
+  const [employeeData, setEmployeeData] = useState({
+    EmployeeId: 0,
+    EmployeeName: '',
+    JobName: '',
+    extraHours: 0,
+    Date: '',
+    Manager: '',
+    observaciones: '',
+    hora: 0,    
+  });
 
+  const [date, setDate] = useState(null);
+  const [hora, setHora] = useState('');
+  const [extraHours, setExtraHours] = useState('');
+  const [observaciones, setObservaciones] = useState('');
+
+  //Para buscar el empleado por el ID
+  const onSearch = async (employeeId) => {
+
+    console.log('VALIDANDO SI ENTRÓ AL BUSCAR POR EMPLEADO: ',employeeId);
+
+    try {
+      // Fetch the employee information based on the employeeId
+      const response = await fetch(`http://localhost:5173/employeeId/${employeeId}`);
+
+      // Check if the response is okay
+      if (!response.ok) {
+        throw new Error('Error fetching employee information');
+      }
+
+      // Parse the response data
+      const data = await response.json();     
+
+      setEmployeeData({
+        EmployeeId: data.EmployeeId,
+        EmployeeName: data.EmployeeName,
+        JobName: data.JobName,
+        extraHours: data.extraHours || '',
+        Date: data.Date || '',
+        Manager: data.Manager || '',
+        observaciones: data.observaciones || '',
+        hora: data.hora || '',
+      });
+      
+      // Handle the fetched data (e.g., display it or set it in the state)
+      console.log('Employee Data:', data);
+      message.success(`Employee data fetched successfully!`);
+
+    } catch (error) {
+      // Handle any errors
+      console.error('Error:', error);
+      message.error(`Failed to fetch employee data: ${error.message}`);
+    }
+  };
+
+
+  //Para guardar la hora extra
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,7 +71,16 @@ export const ExtraHours = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ extrahour, addpercentage, addpricehour }),
+        body: JSON.stringify({ 
+          EmployeeId: employeeData.EmployeeId,
+          EmployeeName: employeeData.EmployeeName,
+          JobName: employeeData.JobName,
+          extraHours,
+          Date: date,
+          Manager: employeeData.Manager,
+          hora,
+          observaciones,
+        }),
       });
 
       if (!response.ok) {
@@ -62,9 +97,7 @@ export const ExtraHours = () => {
             data.message +
             ", los siguientes datos: " +
             data.record
-        );
-        // Redirect to Employees Grid
-        //navigate('/employees');
+        );        
       } else {
         alert("hubo un error al insertar la información " + data.error);
       }
@@ -75,28 +108,40 @@ export const ExtraHours = () => {
 
   return (
     <div id="wrapper">
-      <h1 className="sr-only">Añadir Hora Extra</h1>
-      {/*<div id="login">*/}
+      <h1 className="sr-only">Añadir Hora Extra</h1>      
       <img alt="Amadeus" src={logo} />
       <h2>Añadir Hora Extra</h2>
-      <form id="horasExtrasForm">
-        {/*</form><form id="loginForm" onSubmit={handleSubmit}>*/}
+      <form id="horasExtrasForm" onSubmit={handleSubmit}>        
+        <br/>
         <article>
           <section class="search">
             <Search
-              placeholder="input search text"
+              placeholder="ingrese el id del empleado"
               onSearch={onSearch}
               enterButton
             />
+            <br />
+            <h6><p>EmployeeId: {employeeData.EmployeeId}</p></h6>
+            <h6><p>EmployeeName: {employeeData.EmployeeName}</p></h6>
+            <h6><p>JobName: {employeeData.JobName}</p></h6>
+            <h6><p>ExtraHours: {employeeData.ExtraHours}</p></h6>
+            <h6><p>Date: {employeeData.Date}</p></h6>
+            <h6><p>Manager: {employeeData.Manager}</p></h6>
           </section>
+          <input type="hidden" name="EmployeeId" value={employeeData.EmployeeId} />
+          <input type="hidden" name="EmployeeName" value={employeeData.EmployeeName} />
+          <input type="hidden" name="JobName" value={employeeData.ExtraHours} />
+          <input type="hidden" name="Manager" value={employeeData.Manager} />
           <section class="middle">
-            <label htmlFor="DateRange">Rango fecha:</label>
+            <label htmlFor="DateWorked">Fecha laborada:</label>
             <DatePicker
               id="date"
               name="date"
-              style={{ width: "10%" }}
+              style={{ width: "50%" }}
               placeholder="Añadir Fecha"
               title="Ingrese la fecha"
+              value={date}
+              onChange={(value) => setDate(value)}
               required
             />
           </section>
@@ -105,21 +150,25 @@ export const ExtraHours = () => {
               id="hora"
               placeholder="Seleccionar tipo hora"
               title="Seleccione tipo hora"
+              value={hora}
+              onChange={(value) => setHora(value)}
             >
-              <Option value="Diurna">Diurna</Option>
-              <Option value="DiurnaFestiva">Diurna Festiva</Option>
-              <Option value="NocturnaFestiva">Nocturna</Option>
-              <Option value="Nocturna">Nocturna Festiva</Option>
+              <Option value="25">Diurna 25%</Option>
+              <Option value="75">Diurna Festiva 75%</Option>
+              <Option value="100">Nocturna 100%</Option>
+              <Option value="150">Nocturna Festiva 150%</Option>
             </Select>
-            <label htmlFor="ExtraHour">Hora Extra:</label>
+            </section>
+            <section>
+            <label htmlFor="ExtraHour">Cantidad Horas Extra:</label>
             <input
               type="text"
-              id="extrahour"
-              name="extrahour"
+              id="extraHour"
+              name="extraHour"
               placeholder="extrahour"
               title="Enter Extra Hour"
-              value={extrahour}
-              onChange={(e) => setExtrahour(e.target.value)}
+              value={extraHours}
+              onChange={(e) => setExtraHours(e.target.value)}
               required
             />
           </section>
@@ -127,43 +176,14 @@ export const ExtraHours = () => {
             <TextArea
               showCount
               maxLength={100}
-              onChange={onChange}
-              placeholder="can resize"
+              onChange={(e) => setObservaciones(e.target.value)}
+              placeholder="Obervaciones"
+              value={observaciones}
             />
           </section>
-        </article>
-        {/*<label htmlFor="ExtraHour">Extra hour:</label>
-          <input type="text" 
-            id="extrahour" 
-            name="extrahour" 
-            placeholder="extrahour" 
-            title="Enter Extra Hour" 
-            value={extrahour}
-            onChange={(e) => setExtrahour(e.target.value)}
-            required />          
-          <label htmlFor="AddedPercentage">Add Percentage:</label>
-          <input type="text" 
-            id="addedpercentage" 
-            name="addedpercentage" 
-            placeholder="Add Extra Hour"
-            title="Enter Percentage" 
-            value={addpercentage}
-            onChange={(e) => setPercentage(e.target.value)}
-            required />
-            <label htmlFor="AddPriceHour">Add Price Hour:</label>
-          <input type="text" 
-            id="addpricehour"
-            name="addpricehour"
-            placeholder="Add Price Hour"
-            title="Enter Price Hour"
-            value={addpricehour}
-            onChange={(e) => setPricehour(e.target.value)}
-            required />*/}
+        </article>       
         <button type="submit">Send</button>
       </form>
-      {/*<a href="hotologin">How to login</a>
-        <a href="hotologin">Forgot your password</a>
-      </div>*/}
     </div>
   );
 };

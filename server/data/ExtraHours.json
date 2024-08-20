@@ -1,42 +1,24 @@
-[
+[  
   {
-    "ExtraHour": 3,
-    "AddedPercentage": 15,
-    "PriceHour": 60
+    "id": null,
+    "EmployeeId": "E002",
+    "EmployeeName": "Bob Johnson",
+    "JobName": "Data Analyst",
+    "extraHours": "3",
+    "Date": "2024-08-17T05:00:00.000Z",
+    "Manager": "001",
+    "hora": "75",
+    "observaciones": "Sabado horas de la mañana para fijar un bug"
   },
   {
-    "ExtraHour": 8,
-    "AddedPercentage": 20,
-    "PriceHour": 70
-  },
-  {
-    "ExtraHour": "5",
-    "AddedPercentage": "10",
-    "PriceHour": "50"
-  },
-  {
-    "extrahour": "4",
-    "addpercentage": "8",
-    "addpricehour": "30"
-  },
-  {
-    "extrahour": "6",
-    "addpercentage": "9",
-    "addpricehour": "29"
-  },
-  {
-    "extrahour": "7",
-    "addpercentage": "7",
-    "addpricehour": "28"
-  },
-  {
-    "extrahour": "22",
-    "addpercentage": "22",
-    "addpricehour": "22"
-  },
-  {
-    "extrahour": "24",
-    "addpercentage": "24",
-    "addpricehour": "24"
+    "id": 1,
+    "EmployeeId": "E002",
+    "EmployeeName": "Bob Johnson",
+    "JobName": "Data Analyst",
+    "extraHours": "5",
+    "Date": "2024-08-18T05:00:00.000Z",
+    "Manager": "001",
+    "hora": "75",
+    "observaciones": "Domingo hora Festiva, arrrreglo de bug"
   }
 ]

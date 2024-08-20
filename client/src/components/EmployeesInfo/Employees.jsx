@@ -4,6 +4,34 @@ import logo from "../../pics/login-type-amadeus.png";
 import { Select, DatePicker } from "antd";
 
 export const Employees = () => {
+
+  const [employeeId, setEmployeeId] = useState([]);
+
+  useEffect(() => {
+    const fetchEmployeeId = async () => {
+      try {
+        const response = await fetch("http://localhost:5173/employees");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        //console.log(response);
+        const data = await response.json();        
+
+        //setEmployeeId(data);        
+        //console.log(setEmployeeId(data));
+
+      } catch (error) {
+        console.error(
+          "Hubo un error fetching los datos del id del empleado:",
+          error
+        );
+      }
+    };
+
+    fetchEmployeeId();
+    console.log(fetchEmployeeId());
+  }, []);
+  
   return (
     <div id="wrap">
       <h1 className="sr-only">Horas Extra</h1>
@@ -14,13 +42,22 @@ export const Employees = () => {
         <form id="horasForm">
           <article>
             <section>
-              <label htmlFor="ExtraHour">Id empleado:</label>
+              <label htmlFor="EmployeeId">Id empleado:</label>
+              <input
+                type="text"
+                id="EmployeeId"
+                name="EmployeeId"
+                placeholder="Iid empleado"                
+                disabled
+                required
+              />
+              <label htmlFor="EmployeeId">Id empleado: </label>
               <input
                 type="text"
                 id="EmployeeId"
                 name="EmployeeId"
                 placeholder="Ingrese id empleado"
-                title="Ingrese id empleado"
+                title="Ingrese id empleado"                
                 required
               />
               <label htmlFor="jobName">Cargo:</label>
@@ -53,10 +90,9 @@ export const Employees = () => {
                 title="Ingrese la fecha"
                 required
               />
-              
             </section>
             <section>
-            <button type="submit">Send</button>
+              <button type="submit">Send</button>
             </section>
           </article>
         </form>

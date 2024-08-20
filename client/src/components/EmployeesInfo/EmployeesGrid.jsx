@@ -9,12 +9,34 @@ import UpdateExtraHours from "../ExtraHours/UpdateExtraHours";
 export const EmployeesGrid = () => {
   
   const [employees, setEmployees] = useState([]);
+  const [hours, setHours] = useState([]);
   //const [isModalVisible, setIsModalVisible] = useState(false);
   //const [currentEmployee, setCurrentEmployee] = useState(null); 
 
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
+
+  {/*useEffect(() => {
+
+    const fetchHours = async () => {
+      try {
+        const response = await fetch("http://localhost:5173/extraHours");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        //console.log(response);
+        const data = await response.json();
+        setHours(data);
+        console.log(setHours(data));
+      } catch (error) {
+        console.error("There was an error fetching the employees data:", error);
+      }
+    };
+
+    fetchHours();
+    console.log(fetchHours());
+  }, []);*/}
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -36,8 +58,40 @@ export const EmployeesGrid = () => {
     console.log(fetchEmployees());
   }, []);
 
-  // Define columns for the table
-  const columns = [
+
+  const showAddModal = () => {
+    setIsAddModalVisible(true);
+  };
+  
+  const handleAddOk = () => {
+    setIsAddModalVisible(false);
+  };
+  
+  const handleAddCancel = () => {
+    setIsAddModalVisible(false);
+  };
+  
+  const showUpdateModal = (employee) => {
+    console.log(`MODAL: `, employee);
+    setCurrentEmployee(employee);
+    setIsUpdateModalVisible(true);
+  };
+  
+  const handleUpdateOk = () => {
+    setIsUpdateModalVisible(false);
+  };
+  
+  const handleUpdateCancel = () => {
+    setIsUpdateModalVisible(false);
+  };
+
+  const handleUpdateClick = (record) => {
+    setCurrentEmployee(record);
+    setIsUpdateModalVisible(true);
+  };
+
+   // Define columns for the table
+   const columns = [
     {
       title: "Cédula",
       dataIndex: "EmployeeId",
@@ -55,13 +109,33 @@ export const EmployeesGrid = () => {
     },
     {
       title: "Horas Extras",
-      dataIndex: "ExtraHours",
-      key: "ExtraHours",
+      dataIndex: "extraHours",
+      key: "extraHours",
     },
     {
-      title: "Fecha",
-      dataIndex: "Date",
-      key: "Date",
+      title: "Porcejate Horas",
+      dataIndex: "hora",
+      key: "hora",
+    },
+    {
+      title: "Valor hora",
+      dataIndex: "",
+      key: "",
+    },
+    {
+      title: "Tipo Hora",
+      dataIndex: "",
+      key: "",
+    },
+    {
+      title: "Salario",
+      dataIndex: "",
+      key: "",
+    },
+    {
+      title: "Total a Pagar Horas Extras",
+      dataIndex: "",
+      key: "",
     },
     {
       title: "Supervisor",
@@ -69,11 +143,16 @@ export const EmployeesGrid = () => {
       key: "Manager",
     },
     {
+      title: "Obervaciones",
+      dataIndex: "observaciones",
+      key: "observaciones",
+    },
+    {
       title: 'Actualizar',
       key: 'Actualizar',
       render: (text, record) => (
         <Button
-          type="link"
+          type="link"          
           onClick={() => handleUpdateClick(record)}
         >
           Actualizar
@@ -95,34 +174,11 @@ export const EmployeesGrid = () => {
     // Add more columns as needed
   ];
 
-  const showAddModal = () => {
-    setIsAddModalVisible(true);
-  };
-  
-  const handleAddOk = () => {
-    setIsAddModalVisible(false);
-  };
-  
-  const handleAddCancel = () => {
-    setIsAddModalVisible(false);
-  };
-  
-  const showUpdateModal = (employee) => {
-    setCurrentEmployee(employee);
-    setIsUpdateModalVisible(true);
-  };
-  
-  const handleUpdateOk = () => {
-    setIsUpdateModalVisible(false);
-  };
-  
-  const handleUpdateCancel = () => {
-    setIsUpdateModalVisible(false);
-  };
 
   return (
     <div className="employees-grid">
       
+      {/*Fomrulario de ingreso de id empleado, id gerente*/}
       <Employees />
 
       {/* Button to trigger the modal */}
@@ -133,7 +189,7 @@ export const EmployeesGrid = () => {
       {/* Modal displaying the ExtraHours component */}
       <Modal
         title="Añadir Hora Extra"
-        visible={isAddModalVisible}
+        open={isAddModalVisible}
         onOk={handleAddOk}
         onCancel={handleAddCancel}
         footer={null} // Optional: Remove default footer if you want custom buttons
@@ -147,24 +203,31 @@ export const EmployeesGrid = () => {
           dataSource={employees}
           rowKey="EmployeeId" // Specify the unique key for each row
           pagination={true} // You can enable pagination if needed
-          onRow={(record) => ({
-            onClick: () => showUpdateModal(record),
+          onRow={(record) => ({            
+            onClick: () => {
+              console.log('VALOR DE LA FILA: ', JSON.stringify(record, null, 2));  
+              console.log('VALOR DE LA FILA 1: ',record);
+              showUpdateModal(record);
+            },
           })}
         />
       ) : (
-        <p>No employees found.</p>
+        <p>No se encontraron horas extras.</p>
       )}
       {/* Modal displaying the ExtraHours component */}
       <Modal
         title="Actualizar Hora Extra Empleado"
-        visible={isUpdateModalVisible}
+        open={isUpdateModalVisible}
         onOk={handleUpdateOk}
         onCancel={handleUpdateCancel}
         footer={null} // Optional: Remove default footer if you want custom buttons
       >
 
-        {currentEmployee && (
+        {currentEmployee && ( 
+          <>
+          {console.log('CONSOLE LOG DEL MODAL: ',currentEmployee)}     
           <UpdateExtraHours employee={currentEmployee} />
+          </>
         )}
       </Modal>
     </div>
