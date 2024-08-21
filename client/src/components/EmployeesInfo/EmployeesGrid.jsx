@@ -4,6 +4,7 @@ import Employees from "./Employees";
 import { Table, Button, Modal } from 'antd';
 import ExtraHours from '../ExtraHours/ExtraHours';
 import UpdateExtraHours from "../ExtraHours/UpdateExtraHours";
+import GenerateReport from '../GenerateReport/GenerateReport';
 
 export const EmployeesGrid = () => {
   
@@ -195,7 +196,8 @@ export const EmployeesGrid = () => {
         <Table
           columns={columns}
           dataSource={employees}
-          rowKey="ExtraHour" // Specify the unique key for each row
+          rowKey="id" // Specify the unique key for each row
+          //rowKey="ExtraHour" Specify the unique key for each row
           pagination={true} // You can enable pagination if needed
           onRow={(record) => ({            
             onClick: () => {
@@ -224,6 +226,7 @@ export const EmployeesGrid = () => {
           </>
         )}
       </Modal>
+      <GenerateReport data={employees} />
     </div>
   );
 };

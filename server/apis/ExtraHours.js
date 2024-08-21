@@ -124,7 +124,7 @@ const updateExtraHours = async (req, res) => {
 
 const deleteExtraHours = async (req, res) => {
   try {
-    const { ExtraHour, confirmDelete } = req.params;
+    const { id, ExtraHour, confirmDelete } = req.params;
 
     let getExtraHoursInfoJSON = [];
 
@@ -135,7 +135,7 @@ const deleteExtraHours = async (req, res) => {
     getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
     const recordIndex = getExtraHoursInfoJSON.find(
-      (record) => record.ExtraHour === ExtraHour
+      (record) => record.id === id
     );
 
     if (recordIndex === -1) {

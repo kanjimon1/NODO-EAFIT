@@ -11,17 +11,14 @@ const router = express.Router();
 
 console.log('index de ROUTES');
 
-//router.get('/login/:username/:password', getUsersInfo);
-//router.put('/updateExtraHours/:ExtraHour/:AddedPercentage/:PriceHour', updateExtraHours);
-//router.post('/addExtraHours/:ExtraHour/:AddedPercentage/:PriceHour', addExtraHours);
-router.post('/insertEmployees', addEmployees);
 router.post('/login', getUsersInfo);
+router.post('/insertEmployees', addEmployees);
+router.post('/addExtraHours', addExtraHours);
+router.get('/employeeId/:EmployeeId', getEmployeesInfoId);
 router.get('/employees', getEmployeesInfo);
 router.get('/extraHours', getExtraHoursInfo);
 router.put('/updateExtraHours', updateExtraHours);
 router.delete('/deleteExtraHours/:ExtraHour/:confirmDelete', deleteExtraHours);
-router.post('/addExtraHours', addExtraHours);
-router.get('/employeeId/:EmployeeId', getEmployeesInfoId);
 //router.get('/exportReport', exportReport);
 
 module.exports = router;
