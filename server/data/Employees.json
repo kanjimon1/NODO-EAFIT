@@ -3,24 +3,21 @@
         "EmployeeId": "E001",
         "EmployeeName": "Alice Smith",
         "JobName": "Software Engineer",
-        "ExtraHours": 5,
-        "Date": "2024-07-25",
-        "Manager": "John Doe"
+        "Salary": 3000000,      
+        "Manager": "001"
       },
       {
         "EmployeeId": "E002",
         "EmployeeName": "Bob Johnson",
         "JobName": "Data Analyst",
-        "ExtraHours": 2,
-        "Date": "2024-07-26",
-        "Manager": "Jane Roe"
+        "Salary": 2000000,        
+        "Manager": "002"
       },
       {
         "EmployeeId": "E003",
         "EmployeeName": "Charlie Brown",
         "JobName": "Project Manager",
-        "ExtraHours": 3,
-        "Date": "2024-07-27",
-        "Manager": "John Doe"
+        "Salary": 5000000,        
+        "Manager": "001"
       }
 ]

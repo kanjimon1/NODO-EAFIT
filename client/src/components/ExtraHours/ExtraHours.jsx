@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../../pics/login-type-amadeus.png";
 import { Select, DatePicker, Input } from "antd";
 const { Search, TextArea } = Input;
+import moment from "moment";
 
 export const ExtraHours = () => {
 
@@ -9,17 +10,15 @@ export const ExtraHours = () => {
     EmployeeId: 0,
     EmployeeName: '',
     JobName: '',
-    extraHours: 0,
-    Date: '',
+    Salary: 0,
     Manager: '',
-    observaciones: '',
-    hora: 0,    
+    HourPrice: 0
   });
 
-  const [date, setDate] = useState(null);
-  const [hora, setHora] = useState('');
-  const [extraHours, setExtraHours] = useState('');
-  const [observaciones, setObservaciones] = useState('');
+  const [fecha, setDate] = useState(null);
+  const [extraHourType, setHora] = useState('');
+  const [amountExtraHours, setExtraHours] = useState('');
+  const [comments, setObservaciones] = useState('');
 
   //Para buscar el empleado por el ID
   const onSearch = async (employeeId) => {
@@ -43,10 +42,11 @@ export const ExtraHours = () => {
         EmployeeName: data.EmployeeName,
         JobName: data.JobName,
         extraHours: data.extraHours || '',
+        Salary: data.Salary || '',
+        hourlyRate: data.hourlyRate || '',
         Date: data.Date || '',
         Manager: data.Manager || '',
-        observaciones: data.observaciones || '',
-        hora: data.hora || '',
+        observaciones: data.observaciones || '',        
       });
       
       // Handle the fetched data (e.g., display it or set it in the state)
@@ -75,11 +75,13 @@ export const ExtraHours = () => {
           EmployeeId: employeeData.EmployeeId,
           EmployeeName: employeeData.EmployeeName,
           JobName: employeeData.JobName,
-          extraHours,
-          Date: date,
+          Salary: employeeData.Salary,
           Manager: employeeData.Manager,
-          hora,
-          observaciones,
+          HourPrice: employeeData.hourlyRate,
+          Fecha: fecha,
+          ExtraHourType: extraHourType,
+          AmountExtraHours: amountExtraHours,
+          Comments: comments,
         }),
       });
 
@@ -121,16 +123,17 @@ export const ExtraHours = () => {
               enterButton
             />
             <br />
-            <h6><p>EmployeeId: {employeeData.EmployeeId}</p></h6>
-            <h6><p>EmployeeName: {employeeData.EmployeeName}</p></h6>
-            <h6><p>JobName: {employeeData.JobName}</p></h6>
-            <h6><p>ExtraHours: {employeeData.ExtraHours}</p></h6>
-            <h6><p>Date: {employeeData.Date}</p></h6>
-            <h6><p>Manager: {employeeData.Manager}</p></h6>
+            <h6><bold>EmployeeId:</bold> <p style={{ color: 'red' }}> {employeeData.EmployeeId}</p></h6>
+            <h6>EmployeeName: <p style={{ color: 'red' }}>{employeeData.EmployeeName}</p></h6>
+            <h6>JobName: <p style={{ color: 'red' }}> {employeeData.JobName}</p></h6>
+            <h6>Salario: <p style={{ color: 'red' }}>{employeeData.Salary}</p></h6>        
+            {/*<h6>ExtraHours: <p style={{ color: 'red' }}>{employeeData.extraHours}</p></h6>*/}
+            <h6>Manager: <p style={{ color: 'red' }}>{employeeData.Manager}</p></h6>            
+            <h6>Valor hora salario / 240 hrs por mes: <p style={{ color: 'red' }}> {employeeData.hourlyRate}</p></h6>            
           </section>
           <input type="hidden" name="EmployeeId" value={employeeData.EmployeeId} />
           <input type="hidden" name="EmployeeName" value={employeeData.EmployeeName} />
-          <input type="hidden" name="JobName" value={employeeData.ExtraHours} />
+          {/*<input type="hidden" name="JobName" value={employeeData.extraHours} />*/}
           <input type="hidden" name="Manager" value={employeeData.Manager} />
           <section class="middle">
             <label htmlFor="DateWorked">Fecha laborada:</label>
@@ -140,18 +143,22 @@ export const ExtraHours = () => {
               style={{ width: "50%" }}
               placeholder="Añadir Fecha"
               title="Ingrese la fecha"
-              value={date}
+              value={fecha}
               onChange={(value) => setDate(value)}
+              format="YYYY-MM-DD HH:MM:II"
               required
             />
           </section>
+          <p>
           <section>
+          <label htmlFor="DateWorked">Tipo de hora laborada y porcentaje:</label>
             <Select
               id="hora"
-              placeholder="Seleccionar tipo hora"
-              title="Seleccione tipo hora"
-              value={hora}
+              placeholder="Tipo de hora laborada"
+              title="Tipo de hora laborada"
+              value={extraHourType}
               onChange={(value) => setHora(value)}
+              style={{ width: '200px' }}
             >
               <Option value="25">Diurna 25%</Option>
               <Option value="75">Diurna Festiva 75%</Option>
@@ -159,6 +166,7 @@ export const ExtraHours = () => {
               <Option value="150">Nocturna Festiva 150%</Option>
             </Select>
             </section>
+          </p>          
             <section>
             <label htmlFor="ExtraHour">Cantidad Horas Extra:</label>
             <input
@@ -167,7 +175,7 @@ export const ExtraHours = () => {
               name="extraHour"
               placeholder="extrahour"
               title="Enter Extra Hour"
-              value={extraHours}
+              value={amountExtraHours}
               onChange={(e) => setExtraHours(e.target.value)}
               required
             />
@@ -178,7 +186,7 @@ export const ExtraHours = () => {
               maxLength={100}
               onChange={(e) => setObservaciones(e.target.value)}
               placeholder="Obervaciones"
-              value={observaciones}
+              value={comments}
             />
           </section>
         </article>       

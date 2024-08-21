@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 //import { useNavigate } from 'react-router-dom';
 import logo from "../../pics/login-type-amadeus.png";
+import { Select, DatePicker, Input } from "antd";
+const { Search, TextArea } = Input;
+import moment from "moment";
 
 export const UpdateExtraHours = ({ employee }) => {
 
@@ -11,16 +14,34 @@ export const UpdateExtraHours = ({ employee }) => {
   const [EmployeeName, setEmployeeName] = useState(employee?.EmployeeName || "");
   const [JobName, setJobName] = useState(employee?.JobName || "");
   const [ExtraHours, setExtraHours] = useState(employee?.ExtraHours || "");
-  const [Date, setDate] = useState(employee?.Date || "");
-  const [Manager, setManager] = useState(employee?.Date || "");
+  const [Fecha, setDate] = useState(employee?.Date ? moment(employee.Date) : null);
+  const [Manager, setManager] = useState(employee?.Manager || "");
+  const [observaciones, setObservaciones] = useState(employee?.observaciones || "");
+  const [TipoHora, setTipoHora] = useState(employee?.observaciones || "");
+  
   //const navigate = useNavigate();
 
   console.log(`valor de empleado id`,employee);
+
+  const handleDateChange = (Fecha) => {
+    setDate(Fecha);
+  };
 
   //console.log(`valores antes de enviar ${extrahour} ${addpercentage} ${addpricehour}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const updatedData = {
+      EmployeeId,
+      EmployeeName,
+      JobName,
+      ExtraHours,
+      Fecha: date ? date.format("YYYY-MM-DD") : null,
+      Manager,
+      observaciones,
+      // Incluye otros campos relevantes
+    };
 
     try {
       const response = await fetch("http://localhost:5173/updateExtraHours", {
@@ -28,8 +49,8 @@ export const UpdateExtraHours = ({ employee }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        //body: JSON.stringify({ extrahour, addpercentage, addpricehour}),
-      });
+        body: JSON.stringify(updatedData),
+        });
 
       if (!response.ok) {
         const text = await response.text();
@@ -40,19 +61,12 @@ export const UpdateExtraHours = ({ employee }) => {
       const data = await response.json();
 
       if (data.success) {
-        alert(
-          "Datos actualizados con éxito " +
-            data.message +
-            ", los siguientes datos: " +
-            data.record
-        );
-        // Redirect to Employees Grid
-        //navigate('/employees');
+        alert("Datos actualizados con éxito " +data.message +", los siguientes datos: " +data.record);        
       } else {
-        alert("hubo un error al actualizar la información " + data.error);
+        alert("Hubo un error al actualizar la información " + data.error);
       }
     } catch (error) {
-      console.error("There was an error fetching the users data:", error);
+      console.error("Hubo un error fetching los datos de los usuarios: ", error);
     }
   };
 
@@ -62,79 +76,83 @@ export const UpdateExtraHours = ({ employee }) => {
       {/*<div id="login">*/}
       <img alt="Amadeus" src={logo} />
       <h2>Actualizar Horas Extra</h2>
-      <form id="loginForm" onSubmit={handleSubmit}>
-        <label htmlFor="EmployeeId">ID:</label>
-        <input
-          type="text"
-          id="EmployeeId"
-          name="EmployeeId"
-          placeholder="EmployeeId"
-          title="Enter ID"
-          value={EmployeeId}
-          onChange={(e) => setEmployeeId(e.target.value)}
-          disabled
-          required
-        />
-        <label htmlFor="AddedPercentage">Nombre Empleado:</label>
-        <input
-          type="text"
-          id="EmployeeName"
-          name="EmployeeName"
-          placeholder="Add EmployeeName"
-          title="Enter Employee Name"
-          value={EmployeeName}
-          onChange={(e) => setEmployeeName(e.target.value)}
-          required
-        />
-        <label htmlFor="JobName">Agregar Cargo:</label>
-        <input
-          type="text"
-          id="JobName"
-          name="JobName"
-          placeholder="Add JobName"
-          title="Enter JobName"
-          value={JobName}
-          onChange={(e) => setJobName(e.target.value)}
-          required
-        />
-        <label htmlFor="ExtraHours">Agregar Horas Extras:</label>
-        <input
-          type="text"
-          id="ExtraHours"
-          name="ExtraHours"
-          placeholder="Add Extra Hours"
-          title="Enter Extra Hours"
-          value={ExtraHours}
-          onChange={(e) => setExtraHours(e.target.value)}
-          required
-        />
-        <label htmlFor="Date">Agregar Fecha:</label>
-        <input
-          type="text"
-          id="Date"
-          name="Date"
-          placeholder="Add Date"
-          title="Enter Date"
-          value={Date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-        <label htmlFor="Manager">Agregar Supervisor:</label>
-        <input
-          type="text"
-          id="Manager"
-          name="Manager"
-          placeholder="Add Manager"
-          title="Enter Manager"
-          value={Manager}
-          onChange={(e) => setManager(e.target.value)}
-          required
-        />
+      <form id="UpdataExtraHoursForm" onSubmit={handleSubmit}>
+      <br/>
+        <article>
+          <section class="search">
+            {/*<Search
+              placeholder="ingrese el id del empleado"
+              onSearch={onSearch}
+              enterButton
+            />*/}
+            <br />
+            <h6><p>EmployeeId: {employee.EmployeeId}</p></h6>
+            <h6><p>EmployeeName: {employee.EmployeeName}</p></h6>
+            <h6><p>JobName: {employee.JobName}</p></h6>
+            <h6><p>ExtraHours: {employee.ExtraHours}</p></h6>
+            <h6><p>Date: {employee.Date}</p></h6>
+            <h6><p>Manager: {employee.Manager}</p></h6>            
+          </section>
+          {/*<input type="hidden" name="EmployeeId" value={employeeData.EmployeeId} />
+          <input type="hidden" name="EmployeeName" value={employeeData.EmployeeName} />
+          <input type="hidden" name="JobName" value={employeeData.ExtraHours} />
+          <input type="hidden" name="Manager" value={employeeData.Manager} />*/}
+          <section class="middle">
+            <label htmlFor="DateWorked">Fecha laborada:</label>
+            <DatePicker
+              id="date"
+              name="date"
+              style={{ width: "50%" }}
+              placeholder="Añadir Fecha"
+              title="Ingrese la fecha"
+              value={Fecha}              
+              onChange={handleDateChange}
+              format="YYYY-MM-DD HH:mm"
+              showTime={{ format: "HH:mm" }}
+              required
+            />
+          </section>
+          <section>
+          <label htmlFor="DateWorked">Tipo de hora laborada y porcentaje:</label>
+            <Select
+              id="TipoHora"
+              placeholder="Seleccionar tipo hora"
+              title="Seleccione tipo hora"
+              value={employee.TipoHora}
+              onChange={(value) => setHora(value)}
+              style={{ width: '200px' }}
+            >
+              <Option value="25">Diurna 25%</Option>
+              <Option value="75">Diurna Festiva 75%</Option>
+              <Option value="100">Nocturna 100%</Option>
+              <Option value="150">Nocturna Festiva 150%</Option>
+            </Select>
+            </section>
+            <section>
+            <label htmlFor="ExtraHour">Cantidad Horas Extra:</label>
+            <input
+              type="text"
+              id="extraHour"
+              name="extraHour"
+              placeholder="extrahour"
+              title="Enter Extra Hour"
+              value={ExtraHours}
+              onChange={(e) => setExtraHours(e.target.value)}
+              required
+            />
+          </section>
+          <section class="textarea">
+            <TextArea
+              showCount
+              maxLength={100}
+              onChange={(e) => setObservaciones(e.target.value)}
+              placeholder="Obervaciones"
+              value={observaciones}
+            />
+          </section>
+        </article>       
         <button type="submit">Send</button>
       </form>
-      {/*<a href="hotologin">How to login</a>
-        <a href="hotologin">Forgot your password</a>
-      </div>*/}
     </div>
   );
 };

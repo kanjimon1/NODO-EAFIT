@@ -108,44 +108,54 @@ export const EmployeesGrid = () => {
       key: "JobName",
     },
     {
-      title: "Horas Extras",
-      dataIndex: "extraHours",
-      key: "extraHours",
-    },
-    {
-      title: "Porcejate Horas",
-      dataIndex: "hora",
-      key: "hora",
-    },
-    {
-      title: "Valor hora",
-      dataIndex: "",
-      key: "",
-    },
-    {
-      title: "Tipo Hora",
-      dataIndex: "",
-      key: "",
-    },
-    {
       title: "Salario",
-      dataIndex: "",
-      key: "",
+      dataIndex: "Salary",
+      key: "Salary",
     },
     {
-      title: "Total a Pagar Horas Extras",
-      dataIndex: "",
-      key: "",
-    },
-    {
-      title: "Supervisor",
+      title: "Sypervisor",
       dataIndex: "Manager",
       key: "Manager",
     },
     {
+      title: "Valor hora",
+      dataIndex: "HourPrice",
+      key: "HourPrice",
+    },
+    {
+      title: "Fecha",
+      dataIndex: "Fecha",
+      key: "Fecha",
+    },
+    {
+      title: "Tipo Hora Extra",
+      dataIndex: "ExtraHourType",
+      key: "ExtraHourType",
+    },
+    {
+      title: "Tipo Hora",
+      dataIndex: "TipoHora",
+      key: "TipoHora",
+    },
+    {
+      title: "Cantidad horas Extras",
+      dataIndex: "AmountExtraHours",
+      key: "AmountExtraHours",
+    },
+    {
       title: "Obervaciones",
-      dataIndex: "observaciones",
-      key: "observaciones",
+      dataIndex: "Comments",
+      key: "Comments",
+    },
+    {
+      title: "Total de horas extras",
+      dataIndex: "TotalExtraHour",
+      key: "TotalExtraHour",
+    },
+    {
+      title: "Total a pagar",
+      dataIndex: "TotalPayment",
+      key: "TotalPayment",
     },
     {
       title: 'Actualizar',
@@ -201,7 +211,7 @@ export const EmployeesGrid = () => {
         <Table
           columns={columns}
           dataSource={employees}
-          rowKey="EmployeeId" // Specify the unique key for each row
+          rowKey="ExtraHour" // Specify the unique key for each row
           pagination={true} // You can enable pagination if needed
           onRow={(record) => ({            
             onClick: () => {

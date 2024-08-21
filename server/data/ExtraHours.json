@@ -1,24 +1,18 @@
-[  
-  {
-    "id": null,
-    "EmployeeId": "E002",
-    "EmployeeName": "Bob Johnson",
-    "JobName": "Data Analyst",
-    "extraHours": "3",
-    "Date": "2024-08-17T05:00:00.000Z",
-    "Manager": "001",
-    "hora": "75",
-    "observaciones": "Sabado horas de la mañana para fijar un bug"
-  },
+[
   {
     "id": 1,
     "EmployeeId": "E002",
     "EmployeeName": "Bob Johnson",
     "JobName": "Data Analyst",
-    "extraHours": "5",
-    "Date": "2024-08-18T05:00:00.000Z",
-    "Manager": "001",
-    "hora": "75",
-    "observaciones": "Domingo hora Festiva, arrrreglo de bug"
+    "Salary": 2000000,
+    "Manager": "002",
+    "HourPrice": 8333.333333333334,
+    "Fecha": "2024-08-04T05:00:00.000Z",
+    "ExtraHourType": "100",
+    "TipoHora": "Nocturna 100%",
+    "AmountExtraHours": "8",
+    "Comments": "Domingo nocturno llamada soporte",
+    "TotalExtraHour": 66666.66666666667,
+    "TotalPayment": 2066666.6666666667
   }
 ]
