@@ -207,6 +207,7 @@ export const EmployeesGrid = () => {
         <ExtraHours /> {/* Render the ExtraHours form here */}
       </Modal>
 
+      {/*Tabla par listas las horas extras de los empleados*/}
       {employees.length > 0 ? (
         <Table
           columns={columns}

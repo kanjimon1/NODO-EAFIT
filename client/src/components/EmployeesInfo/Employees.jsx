@@ -1,45 +1,63 @@
 import React, { useEffect, useState } from "react";
-//import { Table } from "antd";
 import logo from "../../pics/login-type-amadeus.png";
-import { Select, DatePicker } from "antd";
+import { Select } from "antd";
 
 export const Employees = () => {
 
   const [employeeId, setEmployeeId] = useState([]);
+  const [employeeName, setEmployeeName] = useState(null);
+  const [jobName, setJobName] = useState('');
+  const [salary, setSalary] = useState('');
+  const [manager, setManager] = useState('');
 
-  useEffect(() => {
-    const fetchEmployeeId = async () => {
+    //Para guardar la hora extra
+    const handleSubmit = async (e) => {
+
+      console.log('ingresando los siguientes empleados: ',employeeId,
+        employeeName,
+        jobName,
+        salary,
+        manager);
+
+      e.preventDefault();
       try {
-        const response = await fetch("http://localhost:5173/employees");
+        const response = await fetch("http://localhost:5173/insertEmployees", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ EmployeeId: employeeId,
+            EmployeeName: employeeName,
+            JobName: jobName,
+            Salary: salary,
+            Manager: manager,
+          }),
+        });
         if (!response.ok) {
+          const text = await response.text();
+          console.error("Response text:", text);
           throw new Error("Network response was not ok");
         }
-        //console.log(response);
-        const data = await response.json();        
-
-        //setEmployeeId(data);        
-        //console.log(setEmployeeId(data));
-
+  
+        const data = await response.json();
+  
+        if (data.success) {
+          alert("Datos guardados con éxito " + data.message + ", los siguientes datos: " +data.record);        
+        } else {
+          alert("hubo un error al insertar la información " + data.error);
+        }
       } catch (error) {
-        console.error(
-          "Hubo un error fetching los datos del id del empleado:",
-          error
-        );
+        console.error("There was an error fetching the users data:", error);
       }
-    };
-
-    fetchEmployeeId();
-    console.log(fetchEmployeeId());
-  }, []);
+  };
   
   return (
-    <div id="wrap">
-      <h1 className="sr-only">Horas Extra</h1>
+    <div id="wrapper">
+      <h1 className="sr-only">Empleados</h1>
       <div id="horas">
         <img alt="Amadeus" src={logo} />
-        <h2>Horas Extra</h2>
-        {/*<form id="loginForm" onSubmit={handleSubmit}>*/}
-        <form id="horasForm">
+        <h2>Empleados</h2>
+        <form id="employessForm" onSubmit={handleSubmit}>
           <article>
             <section>
               <label htmlFor="EmployeeId">Id empleado:</label>
@@ -47,24 +65,47 @@ export const Employees = () => {
                 type="text"
                 id="EmployeeId"
                 name="EmployeeId"
-                placeholder="Iid empleado"                
-                disabled
+                placeholder="Id empleado"
+                onChange={(e) => setEmployeeId(e.target.value)}
+                value={employeeId}
                 required
               />
-              <label htmlFor="EmployeeId">Id empleado: </label>
+              </section>
+              <section>
+              <label htmlFor="EmployeeId">Nombre empleado: </label>
               <input
                 type="text"
-                id="EmployeeId"
-                name="EmployeeId"
-                placeholder="Ingrese id empleado"
-                title="Ingrese id empleado"                
+                id="EmployeeName"
+                name="EmployeeName"
+                placeholder="Ingrese nombre empleado"
+                title="Ingrese nombre empleado"
+                onChange={(e) => setEmployeeName(e.target.value)}
+                value={employeeName}
                 required
               />
+              </section>
+              <section>
+              <label htmlFor="salary">Salario: </label>
+              <input
+                type="text"
+                id="salary"
+                name="salary"
+                placeholder="Ingrese salario"
+                title="Ingrese salario"
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)}                
+                required
+              />
+              </section>
+              <section>
               <label htmlFor="jobName">Cargo:</label>
               <Select
                 id="jobName"
                 placeholder="Seleccionar cargo"
                 title="Seleccione el cargo"
+                value={jobName}
+                onChange={(value) => setJobName(value)}
+                style={{ width: '200px' }}
               >
                 <Option value="Gerente">Gerente</Option>
                 <Option value="Supervisor">Supervisor</Option>
@@ -72,24 +113,21 @@ export const Employees = () => {
               </Select>
             </section>
             <section>
-              <label htmlFor="AddPriceHour">Id Gerente:</label>
-              <input
-                type="text"
+              <label htmlFor="manager">Id Gerente:</label>            
+              <Select
                 id="manager"
-                name="manager"
-                placeholder="Id Gerente"
-                title="Ingrese id gerente"
-                required
-              />
-              <label htmlFor="DateRange">Rango fecha:</label>
-              <DatePicker
-                id="date"
-                name="date"
-                style={{ width: "10%" }}
-                placeholder="Añadir Fecha"
-                title="Ingrese la fecha"
-                required
-              />
+                placeholder="Seleccionar gerente"
+                title="Seleccione gerente"
+                value={manager}
+                onChange={(value) => setManager(value)}
+                style={{ width: '200px' }}
+              >
+                <Option value="001">001 John Doe</Option>
+                <Option value="002">002 Regina Smith</Option>
+                <Option value="003">003 Kyle Bennett</Option>
+              </Select>
+              </section>
+              <section>
             </section>
             <section>
               <button type="submit">Send</button>

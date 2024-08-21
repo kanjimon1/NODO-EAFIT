@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { readJsonFile } = require("../utils/json-reader");
+const { updateJsonFile } = require("../utils/json-reader");
 
 const getEmployeesInfo = async (req, res) => {
   try {
@@ -64,7 +65,80 @@ const getEmployeesInfoId = async (req, res) => {
   }
 };
 
+const addEmployees = async (req, res) => {
+  try {
+    const { EmployeeId, EmployeeName, JobName, Salary, Manager } = req.body;
+
+    console.log('Llegando al método de insertar empleado: ',EmployeeId, EmployeeName, JobName, Salary, Manager);
+
+    let getEmployeesInfoJSON = [];
+
+    // Validar que el cuerpo de la solicitud tiene los datos necesarios
+    if (!EmployeeId || !EmployeeName || !JobName || !Salary || !Manager) {
+      return res
+        .status(400)
+        .send({ error: "Por favor ingrese todos los datos" });
+    }
+
+    console.log('HAY DATOS: ',EmployeeId, EmployeeName, JobName, Salary, Manager);
+
+    getEmployeesInfoJSON = await readJsonFile("./data/Employees.json");
+
+    console.log('lectura json empleados: ',getEmployeesInfoJSON);
+
+    // Crear un nuevo ID para el nuevo registro
+    const newId =
+      getEmployeesInfoJSON.length > 0
+        ? getEmployeesInfoJSON[getEmployeesInfoJSON.length - 1].id + 1
+        : 1;
+
+        console.log('Nuevo ID: ',newId);
+
+    const existingRecord = getEmployeesInfoJSON.find((record) => record.id === newId);
+
+    console.log('Nuevo ID EXISTE?: ',existingRecord);
+
+    if (existingRecord) {
+      return res.status(400).send({ error: "Registro ya existente" });
+    }
+
+    console.log('DATOS A INGRESAR: ', newId,
+      EmployeeId,
+      EmployeeName,
+      JobName,
+      Salary,
+      Manager);
+
+    const newRecord = {
+      id: newId,
+      EmployeeId,
+      EmployeeName,
+      JobName,
+      Salary,
+      Manager,
+    };
+
+    getEmployeesInfoJSON.push(newRecord);
+
+    console.log('DATOS INGRESADOS: ',newRecord);
+
+    // Escribir los datos actualizados de vuelta en el archivo
+    await updateJsonFile("./data/Employees.json", getEmployeesInfoJSON);
+
+    console.log('DATOS ESCRITOS: ',newRecord);
+
+    //res.status(200).send({ message: 'Record added successfully', record: newRecord });
+    res.status(200).json({ success: true, message: "OK", record: newRecord });
+
+    console.log('RESPUESTA RETORNADA: ',newRecord);
+
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
 module.exports = {
   getEmployeesInfo,
   getEmployeesInfoId,
+  addEmployees,
 };
