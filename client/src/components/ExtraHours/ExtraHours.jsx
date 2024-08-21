@@ -60,10 +60,9 @@ export const ExtraHours = () => {
     }
   };
 
-
   //Para guardar la hora extra
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
 
     try {
       const response = await fetch("http://localhost:5173/addExtraHours", {
@@ -126,14 +125,12 @@ export const ExtraHours = () => {
             <h6><bold>EmployeeId:</bold> <p style={{ color: 'red' }}> {employeeData.EmployeeId}</p></h6>
             <h6>EmployeeName: <p style={{ color: 'red' }}>{employeeData.EmployeeName}</p></h6>
             <h6>JobName: <p style={{ color: 'red' }}> {employeeData.JobName}</p></h6>
-            <h6>Salario: <p style={{ color: 'red' }}>{employeeData.Salary}</p></h6>        
-            {/*<h6>ExtraHours: <p style={{ color: 'red' }}>{employeeData.extraHours}</p></h6>*/}
+            <h6>Salario: <p style={{ color: 'red' }}>{employeeData.Salary}</p></h6>            
             <h6>Manager: <p style={{ color: 'red' }}>{employeeData.Manager}</p></h6>            
-            <h6>Valor hora salario / 240 hrs por mes: <p style={{ color: 'red' }}> {employeeData.hourlyRate}</p></h6>            
+            <h6>Valor hora (salario / 240 hrs por mes): <p style={{ color: 'red' }}> {employeeData.hourlyRate}</p></h6>
           </section>
           <input type="hidden" name="EmployeeId" value={employeeData.EmployeeId} />
-          <input type="hidden" name="EmployeeName" value={employeeData.EmployeeName} />
-          {/*<input type="hidden" name="JobName" value={employeeData.extraHours} />*/}
+          <input type="hidden" name="EmployeeName" value={employeeData.EmployeeName} />          
           <input type="hidden" name="Manager" value={employeeData.Manager} />
           <section class="middle">
             <label htmlFor="DateWorked">Fecha laborada:</label>

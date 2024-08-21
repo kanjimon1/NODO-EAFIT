@@ -19,7 +19,7 @@ export const Employees = () => {
         salary,
         manager);
 
-      e.preventDefault();
+      //e.preventDefault();
       try {
         const response = await fetch("http://localhost:5173/insertEmployees", {
           method: "POST",
@@ -107,9 +107,11 @@ export const Employees = () => {
                 onChange={(value) => setJobName(value)}
                 style={{ width: '200px' }}
               >
-                <Option value="Gerente">Gerente</Option>
-                <Option value="Supervisor">Supervisor</Option>
-                <Option value="Empleado">Empleado</Option>
+                <Option value="DevOps">DevOps</Option>
+                <Option value="DBA">DBA</Option>
+                <Option value="SRE">Site Reliability Engineering</Option>
+                <Option value="DEVELOPER">Developer</Option>
+                <Option value="SECOPS">Security</Option>
               </Select>
             </section>
             <section>

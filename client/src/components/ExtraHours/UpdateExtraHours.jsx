@@ -1,26 +1,17 @@
-//import React from 'react';
 import React, { useState } from "react";
-//import { useNavigate } from 'react-router-dom';
 import logo from "../../pics/login-type-amadeus.png";
 import { Select, DatePicker, Input } from "antd";
-const { Search, TextArea } = Input;
+const { TextArea } = Input;
 import moment from "moment";
 
 export const UpdateExtraHours = ({ employee }) => {
 
-  const empId = employee?.id;
-
-  const [EmployeeId, setEmployeeId] = useState(employee?.EmployeeId || "");
-  const [EmployeeName, setEmployeeName] = useState(employee?.EmployeeName || "");
-  const [JobName, setJobName] = useState(employee?.JobName || "");
-  const [ExtraHours, setExtraHours] = useState(employee?.ExtraHours || "");
-  const [Fecha, setDate] = useState(employee?.Date ? moment(employee.Date) : null);
-  const [Manager, setManager] = useState(employee?.Manager || "");
-  const [observaciones, setObservaciones] = useState(employee?.observaciones || "");
-  const [TipoHora, setTipoHora] = useState(employee?.observaciones || "");
-  
-  //const navigate = useNavigate();
-
+  const empId = employee?.id;  
+  const [fecha, setDate] = useState(employee?.Date ? moment(employee.Date) : null);  
+  const [extraHourType, setHourType] = useState(employee?.ExtraHourType || "");
+  const [amountExtraHours, setAmountExtraHours] = useState(employee?.AmountExtraHours || "");
+  const [comments, setComments] = useState(employee?.Comments || "");
+    
   console.log(`valor de empleado id`,employee);
 
   const handleDateChange = (Fecha) => {
@@ -30,17 +21,16 @@ export const UpdateExtraHours = ({ employee }) => {
   //console.log(`valores antes de enviar ${extrahour} ${addpercentage} ${addpricehour}`);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
 
     const updatedData = {
-      EmployeeId,
-      EmployeeName,
-      JobName,
-      ExtraHours,
-      Fecha: date ? date.format("YYYY-MM-DD") : null,
-      Manager,
-      observaciones,
-      // Incluye otros campos relevantes
+          id: empId,          
+          Salary: employee.Salary,
+          HourPrice: employee.HourPrice,
+          Fecha: fecha,
+          ExtraHourType: extraHourType,
+          AmountExtraHours: amountExtraHours,
+          Comments: comments,
     };
 
     try {
@@ -72,31 +62,21 @@ export const UpdateExtraHours = ({ employee }) => {
 
   return (
     <div id="wrapper">
-      <h1 className="sr-only">Actualizar Hora Extra</h1>
-      {/*<div id="login">*/}
+      <h1 className="sr-only">Añadir Hora Extra</h1>      
       <img alt="Amadeus" src={logo} />
-      <h2>Actualizar Horas Extra</h2>
-      <form id="UpdataExtraHoursForm" onSubmit={handleSubmit}>
-      <br/>
+      <h2>Añadir Hora Extra</h2>
+      <form id="horasExtrasForm" onSubmit={handleSubmit}>        
+        <br/>
         <article>
-          <section class="search">
-            {/*<Search
-              placeholder="ingrese el id del empleado"
-              onSearch={onSearch}
-              enterButton
-            />*/}
+          <section class="search">            
             <br />
-            <h6><p>EmployeeId: {employee.EmployeeId}</p></h6>
-            <h6><p>EmployeeName: {employee.EmployeeName}</p></h6>
-            <h6><p>JobName: {employee.JobName}</p></h6>
-            <h6><p>ExtraHours: {employee.ExtraHours}</p></h6>
-            <h6><p>Date: {employee.Date}</p></h6>
-            <h6><p>Manager: {employee.Manager}</p></h6>            
+            <h6><strong>EmployeeId:</strong> <p style={{ color: 'red' }}> {employee.EmployeeId}</p></h6>
+            <h6><strong>EmployeeName: <p style={{ color: 'red' }}>{employee.EmployeeName}</p></strong></h6>
+            <h6><strong>JobName: <p style={{ color: 'red' }}> {employee.JobName}</p></strong></h6>
+            <h6><strong>Salario: <p style={{ color: 'red' }}>{employee.Salary}</p></strong></h6>            
+            <h6><strong>Manager: <p style={{ color: 'red' }}>{employee.Manager}</p></strong></h6>   
+            <h6><strong>Valor hora (salario / 240 hrs por mes): <p style={{ color: 'red' }}> {employee.HourPrice}</p></strong></h6>
           </section>
-          {/*<input type="hidden" name="EmployeeId" value={employeeData.EmployeeId} />
-          <input type="hidden" name="EmployeeName" value={employeeData.EmployeeName} />
-          <input type="hidden" name="JobName" value={employeeData.ExtraHours} />
-          <input type="hidden" name="Manager" value={employeeData.Manager} />*/}
           <section class="middle">
             <label htmlFor="DateWorked">Fecha laborada:</label>
             <DatePicker
@@ -105,21 +85,22 @@ export const UpdateExtraHours = ({ employee }) => {
               style={{ width: "50%" }}
               placeholder="Añadir Fecha"
               title="Ingrese la fecha"
-              value={Fecha}              
+              value={fecha}
               onChange={handleDateChange}
-              format="YYYY-MM-DD HH:mm"
-              showTime={{ format: "HH:mm" }}
+              //onChange={(value) => setDate(value)}
+              format="YYYY-MM-DD HH:MM:II"
               required
             />
           </section>
+          <p>
           <section>
-          <label htmlFor="DateWorked">Tipo de hora laborada y porcentaje:</label>
+          <label htmlFor="extraHourType">Tipo de hora laborada y porcentaje:</label>
             <Select
-              id="TipoHora"
-              placeholder="Seleccionar tipo hora"
-              title="Seleccione tipo hora"
-              value={employee.TipoHora}
-              onChange={(value) => setHora(value)}
+              id="extraHourType"
+              placeholder="Tipo de hora laborada"
+              title="Tipo de hora laborada"
+              value={extraHourType}              
+              onChange={(value) => setHourType(value)}
               style={{ width: '200px' }}
             >
               <Option value="25">Diurna 25%</Option>
@@ -128,6 +109,7 @@ export const UpdateExtraHours = ({ employee }) => {
               <Option value="150">Nocturna Festiva 150%</Option>
             </Select>
             </section>
+          </p>          
             <section>
             <label htmlFor="ExtraHour">Cantidad Horas Extra:</label>
             <input
@@ -136,21 +118,21 @@ export const UpdateExtraHours = ({ employee }) => {
               name="extraHour"
               placeholder="extrahour"
               title="Enter Extra Hour"
-              value={ExtraHours}
-              onChange={(e) => setExtraHours(e.target.value)}
+              value={amountExtraHours}              
+              onChange={(e) => setAmountExtraHours(e.target.value)}
               required
             />
           </section>
           <section class="textarea">
             <TextArea
               showCount
-              maxLength={100}
-              onChange={(e) => setObservaciones(e.target.value)}
+              maxLength={100}              
+              onChange={(e) => setComments(e.target.value)}
               placeholder="Obervaciones"
-              value={observaciones}
+              value={comments}
             />
           </section>
-        </article>       
+        </article>
         <button type="submit">Send</button>
       </form>
     </div>

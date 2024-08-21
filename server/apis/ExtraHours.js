@@ -15,37 +15,110 @@ const getExtraHoursInfo = async (req, res) => {
 };
 
 const updateExtraHours = async (req, res) => {
+  
   try {
-    //const { ExtraHour, AddedPercentage, PriceHour } = req.params;
-    const { extraHour, addedPercentage, priceHour } = req.body;
+    
+    const {
+      id,      
+      HourPrice,
+      Salary,
+      Fecha,
+      ExtraHourType,
+      AmountExtraHours,
+      Comments,
+    } = req.body;
 
-    let getExtraHoursInfoJSON = [];
+    let updateExtraHoursJSON = [];
 
-    const ExtraHour = parseInt(extraHour, 10);
-    const AddedPercentage = parseFloat(addedPercentage);
-    const PriceHour = parseFloat(priceHour);
+    //Convertir los string en number para calcular las horas
+    const extraHourTypeNumber = Number(ExtraHourType);
+    const amountExtraHours = Number(AmountExtraHours);
+    const salary = Number(Salary);
 
-    getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
+    console.log(`estos son los valores del formulario: ${id} ${Salary} ${Fecha} ${ExtraHourType} ${AmountExtraHours} ${Comments} 
+        ${extraHourTypeNumber} ${amountExtraHours} ${salary}`);
 
-    const hourFound = getExtraHoursInfoJSON.find((updateExtraHours) => {
-      return updateExtraHours.extraHour === ExtraHour;
+    // Validar que el cuerpo de la solicitud tiene los datos necesarios
+    if (!Salary ||      
+      !Fecha ||
+      !ExtraHourType ||
+      !AmountExtraHours ||
+      !Comments
+    ) {
+      return res
+        .status(400)
+        .send({ error: "Por favor ingrese todos los siguientes datos" });
+    }
+
+    //getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
+    updateExtraHoursJSON = await readJsonFile("./data/ExtraHours.json");
+
+    const ids = updateExtraHoursJSON.find((updateExtraHours) => {
+      return updateExtraHours.id === id;
     });
 
-    if (hourFound === -1) {
+    if (ids === -1) {
       return res.status(404).send({ error: "Record not found" });
     }
 
-    getExtraHoursInfoJSON[hourFound] = {
-      ...getExtraHoursInfoJSON[hourFound],
-      addedPercentage: AddedPercentage,
-      priceHour: PriceHour,
-    };
+    let precioFinal;
 
-    await updateJsonFile("./data/ExtraHours.json", getExtraHoursInfoJSON);
+    if (extraHourTypeNumber === 25) {
+      precioFinal = HourPrice * 0.25;
+    } else if (extraHourTypeNumber === 75) {
+      precioFinal = HourPrice * 0.75;
+    } else if (extraHourTypeNumber === 100) {
+      precioFinal = HourPrice * 1;
+    } else if (extraHourTypeNumber === 150) {
+      precioFinal = HourPrice * 1.5;
+    } else {
+      throw new Error("Porcentaje Hora no válido");
+    }
 
-    res.status(200).send(getExtraHoursInfoJSON[hourFound]);
+    const precioFinal1 = Number(precioFinal);
+
+    //Calcular el valor total de las extras horas trabajadas
+    const TotalExtraHour = precioFinal1 * amountExtraHours;
+
+    //Calcular la suma del salario más el total de la horas extras
+    const TotalPayment = TotalExtraHour + salary;
+
+    //Para setear el tipo de hora de forma string
+    let descripcion;
+
+    switch (extraHourTypeNumber) {
+      case 25:
+        TipoHoras = "Diurna 25%";
+        break;
+      case 75:
+        TipoHoras = "Diurna Festiva 75%";
+        break;
+      case 100:
+        TipoHoras = "Nocturna 100%";
+        break;
+      case 150:
+        TipoHoras = "Nocturna Festiva 150%";
+        break;
+      default:
+        TipoHoras = "Porcentaje desconocido"; // Opcional, en caso de que el valor no coincida con ningún caso
+    }
+
+    updateExtraHoursJSON[ids] = {
+      ...updateExtraHoursJSON[ids],
+      Fecha: Fecha,
+      ExtraHourTypeNumber: extraHourTypeNumber,
+      TipoHora: TipoHoras,
+      AmountExtraHours: amountExtraHours,
+      Comments: Comments,
+      TotalExtraHour: TotalExtraHour,
+      TotalPayment: TotalPayment,
+  }
+
+    await updateJsonFile("./data/ExtraHours.json", updateExtraHoursJSON);
+    
+    res.status(200).send({ success: true, message: "OK", record: updateExtraHoursJSON });
   } catch (error) {
-    res.status(400);
+    res.status(400, error);
   }
 };
 
@@ -82,10 +155,7 @@ const deleteExtraHours = async (req, res) => {
 
 const addExtraHours = async (req, res) => {
   try {
-    //const { ExtraHour, AddedPercentage, PriceHour } = req.params;
-    //const { extrahour,addpercentage, addpricehour } = req.body;
-    //const { date,hora, extrahour, Obervaciones } = req.body;
-
+    
     const {
       EmployeeId,
       EmployeeName,
@@ -130,7 +200,6 @@ const addExtraHours = async (req, res) => {
     getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
     // Comprobar si el ID ya existe
-
     // Crear un nuevo ID para el nuevo registro
     const newId =
       getExtraHoursInfoJSON.length > 0

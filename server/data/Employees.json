@@ -30,5 +30,13 @@
     "JobName": "Gerente",
     "Salary": "6500000",
     "Manager": "003"
+  },
+  {
+    "id": 5,
+    "EmployeeId": "E005",
+    "EmployeeName": "Camilo Montoya",
+    "JobName": "DBA",
+    "Salary": "6500000",
+    "Manager": "003"
   }
 ]

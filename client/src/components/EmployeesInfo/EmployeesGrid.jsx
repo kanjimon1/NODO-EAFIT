@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import { Table } from "antd";
 import logo from "../../pics/login-type-amadeus.png";
 import Employees from "./Employees";
 import { Table, Button, Modal } from 'antd';
@@ -16,27 +15,6 @@ export const EmployeesGrid = () => {
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
-
-  {/*useEffect(() => {
-
-    const fetchHours = async () => {
-      try {
-        const response = await fetch("http://localhost:5173/extraHours");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        //console.log(response);
-        const data = await response.json();
-        setHours(data);
-        console.log(setHours(data));
-      } catch (error) {
-        console.error("There was an error fetching the employees data:", error);
-      }
-    };
-
-    fetchHours();
-    console.log(fetchHours());
-  }, []);*/}
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -91,7 +69,12 @@ export const EmployeesGrid = () => {
   };
 
    // Define columns for the table
-   const columns = [
+   const columns = [    
+    {
+      title: "Consecutivo",
+      dataIndex: "id",
+      key: "id",
+    },
     {
       title: "Cédula",
       dataIndex: "EmployeeId",
@@ -128,7 +111,7 @@ export const EmployeesGrid = () => {
       key: "Fecha",
     },
     {
-      title: "Tipo Hora Extra",
+      title: "Porcentaje Hora Extra",
       dataIndex: "ExtraHourType",
       key: "ExtraHourType",
     },
