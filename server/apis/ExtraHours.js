@@ -15,13 +15,16 @@ const getExtraHoursInfo = async (req, res) => {
 };
 
 const updateExtraHours = async (req, res) => {
-  
-  try {
-    
+  try {   
+
     const {
-      id,      
-      HourPrice,
+      id,
+      EmployeeId,
+      EmployeeName,
+      JobName,
       Salary,
+      Manager,
+      HourPrice,
       Fecha,
       ExtraHourType,
       AmountExtraHours,
@@ -31,33 +34,29 @@ const updateExtraHours = async (req, res) => {
     let updateExtraHoursJSON = [];
 
     //Convertir los string en number para calcular las horas
+    const idNumber = Number(id);
     const extraHourTypeNumber = Number(ExtraHourType);
     const amountExtraHours = Number(AmountExtraHours);
     const salary = Number(Salary);
 
-    console.log(`estos son los valores del formulario: ${id} ${Salary} ${Fecha} ${ExtraHourType} ${AmountExtraHours} ${Comments} 
+    console.log(`estos son los valores del formulario: 
+      ${idNumber} ${Salary} ${Fecha} ${ExtraHourType} ${AmountExtraHours} ${Comments} 
         ${extraHourTypeNumber} ${amountExtraHours} ${salary}`);
 
     // Validar que el cuerpo de la solicitud tiene los datos necesarios
-    if (!Salary ||      
-      !Fecha ||
-      !ExtraHourType ||
-      !AmountExtraHours ||
-      !Comments
-    ) {
+    if (!Salary || !Fecha || !ExtraHourType || !AmountExtraHours || !Comments) {
       return res
         .status(400)
         .send({ error: "Por favor ingrese todos los siguientes datos" });
     }
 
-    //getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
     updateExtraHoursJSON = await readJsonFile("./data/ExtraHours.json");
 
-    const ids = updateExtraHoursJSON.find((updateExtraHours) => {
-      return updateExtraHours.id === id;
+    const index = updateExtraHoursJSON.findIndex((updateExtraHours) => {
+      return updateExtraHours.id === idNumber;
     });
 
-    if (ids === -1) {
+    if (index === -1) {
       return res.status(404).send({ error: "Record not found" });
     }
 
@@ -103,22 +102,30 @@ const updateExtraHours = async (req, res) => {
         TipoHoras = "Porcentaje desconocido"; // Opcional, en caso de que el valor no coincida con ningún caso
     }
 
-    updateExtraHoursJSON[ids] = {
-      ...updateExtraHoursJSON[ids],
-      Fecha: Fecha,
-      ExtraHourTypeNumber: extraHourTypeNumber,
+    updateExtraHoursJSON[index] = {
+      ...updateExtraHoursJSON[index],
+      EmployeeId,
+      EmployeeName,
+      JobName,
+      Salary,
+      Manager,
+      HourPrice,
+      Fecha,
+      ExtraHourType: extraHourTypeNumber,
       TipoHora: TipoHoras,
       AmountExtraHours: amountExtraHours,
-      Comments: Comments,
-      TotalExtraHour: TotalExtraHour,
-      TotalPayment: TotalPayment,
-  }
+      Comments,
+      TotalExtraHour,
+      TotalPayment,
+    };
 
     await updateJsonFile("./data/ExtraHours.json", updateExtraHoursJSON);
-    
-    res.status(200).send({ success: true, message: "OK", record: updateExtraHoursJSON });
+
+    res
+      .status(200)
+      .send({ success: true, message: "OK", record: updateExtraHoursJSON });
   } catch (error) {
-    res.status(400, error);
+    res.status(400).json(error);
   }
 };
 
@@ -126,36 +133,47 @@ const deleteExtraHours = async (req, res) => {
   try {
     const { id, confirmDelete } = req.params;
 
+    const idNumber = Number(id);
+
     let getExtraHoursInfoJSON = [];
+
+    console.log("DELETE DEL API: ", idNumber, confirmDelete);
 
     if (!confirmDelete) {
       return res.status(400).send({ error: "Deletion not confirmed" });
     }
 
+    console.log("SE CONFIRMO EL DELETE DEL API? ", idNumber, confirmDelete);
+
     getExtraHoursInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
-    const recordIndex = getExtraHoursInfoJSON.find(
-      (record) => record.id === id
-    );
+    //const recordIndex = getExtraHoursInfoJSON.find((record) => record.id === idNumber);
+    const recordIndex = getExtraHoursInfoJSON.findIndex((record) => record.id === idNumber);
+
+    console.log("ID A ELIMINAR ENCONTRADO? ", recordIndex);
 
     if (recordIndex === -1) {
       return res.status(404).send({ error: "Record not found" });
     }
-    
+
     getExtraHoursInfoJSON.splice(recordIndex, 1);
 
     await updateJsonFile("./data/ExtraHours.json", getExtraHoursInfoJSON);
 
+    console.log("ID A ELIMINAR ENCONTRADO? ", recordIndex);
+
     //res.status(200).send({ message: "Record deleted successfully" });
-    res.status(200).json({ success: true, message: "OK", record: newRecord });
+    res.status(200).json({ success: true, message: "OK", record: recordIndex });
+
+    console.log("ELIMINÓ CORRECTAMENTE: ", recordIndex);
   } catch (error) {
-    res.status(400);
+    console.log(error);
+    res.status(400).json(error);
   }
 };
 
 const addExtraHours = async (req, res) => {
   try {
-    
     const {
       EmployeeId,
       EmployeeName,
@@ -257,10 +275,6 @@ const addExtraHours = async (req, res) => {
         TipoHora = "Porcentaje desconocido"; // Opcional, en caso de que el valor no coincida con ningún caso
     }
 
-    //console.log(TotalExtraHour,TotalPayment,precioFinal,ExtraHourType,TipoHora);
-
-    // Crear un nuevo registro
-    //const newRecord = { id: newId, ExtraHour, AddedPercentage, PriceHour };
     const newRecord = {
       id: newId,
       EmployeeId,
@@ -287,7 +301,7 @@ const addExtraHours = async (req, res) => {
     //res.status(200).send({ message: 'Record added successfully', record: newRecord });
     res.status(200).json({ success: true, message: "OK", record: newRecord });
   } catch (error) {
-    res.status(400).json({error});
+    res.status(400).json({ error });
   }
 };
 

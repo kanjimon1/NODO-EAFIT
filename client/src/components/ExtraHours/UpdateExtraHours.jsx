@@ -18,20 +18,22 @@ export const UpdateExtraHours = ({ employee }) => {
     setDate(Fecha);
   };
 
-  //console.log(`valores antes de enviar ${extrahour} ${addpercentage} ${addpricehour}`);
-
   const handleSubmit = async (e) => {
     //e.preventDefault();
 
     const updatedData = {
-          id: empId,          
-          Salary: employee.Salary,
-          HourPrice: employee.HourPrice,
-          Fecha: fecha,
-          ExtraHourType: extraHourType,
-          AmountExtraHours: amountExtraHours,
-          Comments: comments,
-    };
+      id: empId,
+      EmployeeId: employee.EmployeeId,
+      EmployeeName: employee.EmployeeName,
+      JobName: employee.JobName,
+      Salary: employee.Salary,
+      Manager: employee.Manager,
+      HourPrice: employee.HourPrice,
+      Fecha: fecha,
+      ExtraHourType: extraHourType,
+      AmountExtraHours: amountExtraHours,
+      Comments: comments,
+};
 
     try {
       const response = await fetch("http://localhost:5173/updateExtraHours", {
@@ -70,6 +72,7 @@ export const UpdateExtraHours = ({ employee }) => {
         <article>
           <section class="search">            
             <br />
+            <h6><strong>Id:</strong> <p style={{ color: 'red' }}> {empId}</p></h6>
             <h6><strong>EmployeeId:</strong> <p style={{ color: 'red' }}> {employee.EmployeeId}</p></h6>
             <h6><strong>EmployeeName: <p style={{ color: 'red' }}>{employee.EmployeeName}</p></strong></h6>
             <h6><strong>JobName: <p style={{ color: 'red' }}> {employee.JobName}</p></strong></h6>
@@ -86,8 +89,7 @@ export const UpdateExtraHours = ({ employee }) => {
               placeholder="Añadir Fecha"
               title="Ingrese la fecha"
               value={fecha}
-              onChange={handleDateChange}
-              //onChange={(value) => setDate(value)}
+              onChange={handleDateChange}              
               format="YYYY-MM-DD HH:MM:II"
               required
             />

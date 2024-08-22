@@ -4,9 +4,7 @@ const { updateJsonFile } = require("../utils/json-reader");
 
 const getEmployeesInfo = async (req, res) => {
   try {
-    let employeesInfoJSON = [];
-    //employeesInfoJSON = await (process.env.JSON_DIR_EMPLOYEES_INFO);
-    //employeesInfoJSON = await readJsonFile('./data/Employees.json');
+    let employeesInfoJSON = [];    
     employeesInfoJSON = await readJsonFile("./data/ExtraHours.json");
 
     console.log(employeesInfoJSON);
@@ -26,10 +24,6 @@ const getEmployeesInfoId = async (req, res) => {
 
     //employeesInfoJSON = await (process.env.JSON_DIR_EMPLOYEES_INFO);
     employeesInfoJSON = await readJsonFile("./data/Employees.json");
-
-    /*const empId = employeesInfoJSON.find((employee) => {
-            return employee.EmployeeId === EmployeeId;
-        });*/
 
     const employee = employeesInfoJSON.find(
       (emp) => emp.EmployeeId === EmployeeId
@@ -52,14 +46,7 @@ const getEmployeesInfoId = async (req, res) => {
     console.log(employeeData);
 
     res.status(200).send(employeeData);
-
-    /*if (empId.length === 0) {
-            return res.status(404).send({ message: "Employee not found" });
-        }*/
-
-    //console.log(empId);
-
-    //res.status(200).send(empId);
+    
   } catch (error) {
     res.status(400);
   }

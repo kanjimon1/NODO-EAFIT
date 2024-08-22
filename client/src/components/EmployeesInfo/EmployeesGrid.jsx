@@ -76,6 +76,8 @@ export const EmployeesGrid = () => {
   // Función para confirmar la eliminación
   const handleDeleteOk = async () => {
     try {
+
+      console.log(`ELIMINANDO POR ID: ${currentEmployee.id}`);
       const response = await fetch(
         `http://localhost:5173/deleteExtraHours/${currentEmployee.id}/true`,
         {
@@ -90,7 +92,8 @@ export const EmployeesGrid = () => {
       const data = await response.json();
       if (data.success) {
         alert("Registro eliminado con éxito");
-        setEmployees(employees.filter((emp) => emp.id !== currentEmployee.id));
+        window.location.reload(); // Recarga toda la página
+        setEmployees(employees.filter((emp) => emp.id !== currentEmployee.id));        
       } else {
         alert("Error al eliminar: " + data.message);
       }
@@ -223,30 +226,8 @@ export const EmployeesGrid = () => {
         footer={null} // Optional: Remove default footer if you want custom buttons
       >
         <ExtraHours /> {/* Render the ExtraHours form here */}
-      </Modal>
-
-      {/*Tabla par listas las horas extras de los empleados*/}
-      {/*{employees.length > 0 ? (
-        <Table
-          columns={columns}
-          dataSource={employees}
-          rowKey="id" // Specify the unique key for each row
-          //rowKey="ExtraHour" Specify the unique key for each row
-          pagination={true} // You can enable pagination if needed
-          onRow={(record) => ({
-            onClick: () => {
-              console.log(
-                "VALOR DE LA FILA: ",
-                JSON.stringify(record, null, 2)
-              );
-              console.log("VALOR DE LA FILA 1: ", record);
-              showUpdateModal(record);
-            },
-          })}
-        />
-      ) : (
-        <p>No se encontraron horas extras.</p>
-      )}*/}
+      </Modal> 
+      
        {/* Tabla para listar las horas extras de los empleados */}
        {employees.length > 0 ? (
         <Table
@@ -258,22 +239,7 @@ export const EmployeesGrid = () => {
       ) : (
         <p>No se encontraron horas extras.</p>
       )}
-
-      {/* Modal displaying the ExtraHours component */}
-      {/*<Modal
-        title="Actualizar Hora Extra Empleado"
-        open={isUpdateModalVisible}
-        onOk={handleUpdateOk}
-        onCancel={handleUpdateCancel}
-        footer={null} // Optional: Remove default footer if you want custom buttons
-      >
-        {currentEmployee && (
-          <>
-            {console.log("CONSOLE LOG DEL MODAL: ", currentEmployee)}
-            <UpdateExtraHours employee={currentEmployee} />
-          </>
-        )}
-      </Modal>*/}
+      
        {/* Modal para actualizar horas extras */}
        <Modal
         title="Actualizar Hora Extra Empleado"
@@ -296,7 +262,7 @@ export const EmployeesGrid = () => {
         <p>
           ¿Estás seguro de que deseas eliminar este registro?
           <br />
-          ID: {currentEmployee?.id} - Nombre: {currentEmployee?.EmployeeName}
+          ID: {currentEmployee?.EmployeeId} - Nombre: {currentEmployee?.EmployeeName}
         </p>
       </Modal>
       <GenerateReport data={employees} />

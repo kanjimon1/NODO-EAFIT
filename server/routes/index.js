@@ -17,6 +17,6 @@ router.get('/employeeId/:EmployeeId', getEmployeesInfoId);
 router.get('/employees', getEmployeesInfo);
 router.get('/extraHours', getExtraHoursInfo);
 router.put('/updateExtraHours', updateExtraHours);
-router.delete('/deleteExtraHours/:ExtraHour/:confirmDelete', deleteExtraHours);
+router.delete('/deleteExtraHours/:id/:confirmDelete', deleteExtraHours);
 
 module.exports = router;
