@@ -16,8 +16,8 @@ const GenerateReport = ({ data }) => {
      */
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Reporte");
-    XLSX.writeFile(wb, "reporte.xlsx");
+    XLSX.utils.book_append_sheet(wb, ws, "Horas Extras Ingeniería");
+    XLSX.writeFile(wb, "ReporteHorasExtrasIngenieria.xlsx");
   };
   return (
     <button

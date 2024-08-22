@@ -1,34 +1,18 @@
 [
   {
-    "id": 3,
-    "EmployeeId": "E003",
-    "EmployeeName": "Charlie Brown",
-    "JobName": "Project Manager",
-    "Salary": 5000000,
-    "Manager": "001",
-    "HourPrice": 20833.333333333332,
-    "Fecha": "2024-08-03T05:00:00.000Z",
+    "id": 5,
+    "EmployeeId": "E007",
+    "EmployeeName": "Cleopatra",
+    "JobName": "SECOPS",
+    "Salary": "4000000",
+    "Manager": "002",
+    "HourPrice": 16666.666666666668,
+    "Fecha": "2024-07-21T05:00:00.000Z",
     "ExtraHourType": "75",
     "TipoHora": "Diurna Festiva 75%",
-    "AmountExtraHours": "5",
-    "Comments": "SABADO EN LA MAÑANA VALIDAR CREDENCIALES",
-    "TotalExtraHour": 78125,
-    "TotalPayment": 5078125
-  },
-  {
-    "id": 4,
-    "EmployeeId": "E004",
-    "EmployeeName": "Catalina la Grande",
-    "JobName": "Gerente",
-    "Salary": "6500000",
-    "Manager": "003",
-    "HourPrice": 27083.333333333332,
-    "Fecha": "2024-08-08T05:00:00.000Z",
-    "ExtraHourType": "100",
-    "TipoHora": "Nocturna 100%",
     "AmountExtraHours": "3",
-    "Comments": "JUEVES 11 DE LA NOCHE LLAMADA DE SOPORTE",
-    "TotalExtraHour": 81250,
-    "TotalPayment": 6581250
+    "Comments": "Horas festivas Diurnas llamada soporte",
+    "TotalExtraHour": 37500,
+    "TotalPayment": 4037500
   }
 ]

@@ -38,5 +38,21 @@
     "JobName": "DBA",
     "Salary": "6500000",
     "Manager": "003"
+  },
+  {
+    "id": 6,
+    "EmployeeId": "E006",
+    "EmployeeName": "Alejandro Magno",
+    "JobName": "SRE",
+    "Salary": "8000000",
+    "Manager": "003"
+  },
+  {
+    "id": 7,
+    "EmployeeId": "E007",
+    "EmployeeName": "Cleopatra",
+    "JobName": "SECOPS",
+    "Salary": "4000000",
+    "Manager": "002"
   }
 ]
