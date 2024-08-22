@@ -5,7 +5,6 @@ const { getEmployeesInfo } = require('../apis/Employees');
 const { getEmployeesInfoId } = require('../apis/Employees');
 const { getExtraHoursInfo, updateExtraHours, deleteExtraHours, addExtraHours } = require('../apis/ExtraHours');
 const { addEmployees } = require('../apis/Employees');
-//const { exportReport } = require('../apis/ExportFile');
 
 const router = express.Router();
 
@@ -19,6 +18,5 @@ router.get('/employees', getEmployeesInfo);
 router.get('/extraHours', getExtraHoursInfo);
 router.put('/updateExtraHours', updateExtraHours);
 router.delete('/deleteExtraHours/:ExtraHour/:confirmDelete', deleteExtraHours);
-//router.get('/exportReport', exportReport);
 
 module.exports = router;

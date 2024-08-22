@@ -1,37 +1,5 @@
 [
   {
-    "id": 1,
-    "EmployeeId": "E002",
-    "EmployeeName": "Bob Johnson",
-    "JobName": "Data Analyst",
-    "Salary": 2000000,
-    "Manager": "002",
-    "HourPrice": 8333.333333333334,
-    "Fecha": "2024-08-04T05:00:00.000Z",
-    "ExtraHourType": "100",
-    "TipoHora": "Nocturna 100%",
-    "AmountExtraHours": "8",
-    "Comments": "Domingo nocturno llamada soporte",
-    "TotalExtraHour": 66666.66666666667,
-    "TotalPayment": 2066666.6666666667
-  },
-  {
-    "id": 2,
-    "EmployeeId": "E005",
-    "EmployeeName": "Camilo Montoya",
-    "JobName": "DBA",
-    "Salary": "6500000",
-    "Manager": "003",
-    "HourPrice": 27083.333333333332,
-    "Fecha": "2024-08-11T05:00:00.000Z",
-    "ExtraHourType": "150",
-    "TipoHora": "Nocturna Festiva 150%",
-    "AmountExtraHours": "8",
-    "Comments": "Dominical nocturna llamada soporte caida BD",
-    "TotalExtraHour": 325000,
-    "TotalPayment": 6825000
-  },
-  {
     "id": 3,
     "EmployeeId": "E003",
     "EmployeeName": "Charlie Brown",

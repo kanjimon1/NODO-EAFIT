@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../pics/login-type-amadeus.png";
 import Employees from "./Employees";
-import { Table, Button, Modal } from 'antd';
-import ExtraHours from '../ExtraHours/ExtraHours';
+import { Table, Button, Modal } from "antd";
+import ExtraHours from "../ExtraHours/ExtraHours";
 import UpdateExtraHours from "../ExtraHours/UpdateExtraHours";
-import GenerateReport from '../GenerateReport/GenerateReport';
+import GenerateReport from "../GenerateReport/GenerateReport";
 
 export const EmployeesGrid = () => {
-  
   const [employees, setEmployees] = useState([]);
   const [hours, setHours] = useState([]);
   //const [isModalVisible, setIsModalVisible] = useState(false);
-  //const [currentEmployee, setCurrentEmployee] = useState(null); 
+  //const [currentEmployee, setCurrentEmployee] = useState(null);
 
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
 
   useEffect(() => {
@@ -37,29 +37,28 @@ export const EmployeesGrid = () => {
     console.log(fetchEmployees());
   }, []);
 
-
   const showAddModal = () => {
     setIsAddModalVisible(true);
   };
-  
+
   const handleAddOk = () => {
     setIsAddModalVisible(false);
   };
-  
+
   const handleAddCancel = () => {
     setIsAddModalVisible(false);
   };
-  
+
   const showUpdateModal = (employee) => {
     console.log(`MODAL: `, employee);
     setCurrentEmployee(employee);
     setIsUpdateModalVisible(true);
   };
-  
+
   const handleUpdateOk = () => {
     setIsUpdateModalVisible(false);
   };
-  
+
   const handleUpdateCancel = () => {
     setIsUpdateModalVisible(false);
   };
@@ -69,8 +68,56 @@ export const EmployeesGrid = () => {
     setIsUpdateModalVisible(true);
   };
 
-   // Define columns for the table
-   const columns = [    
+  const handleDeleteClick = (record) => {
+    setCurrentEmployee(record);
+    setIsDeleteModalVisible(true);
+  };
+
+  // Función para manejar el clic en "Eliminar"
+  const handleDeleteOk = (record) => {
+    Modal.confirm({
+      title: "¿Estás seguro de que deseas eliminar este registro?",
+      content: `ID: ${record.id} - Nombre: ${record.EmployeeName}`,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk: async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:5173/deleteExtraHours/${record.id}/true`,
+            {
+              method: "DELETE",
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Error al eliminar el registro");
+          }
+
+          const data = await response.json();
+          if (data.success) {
+            alert("Registro eliminado con éxito");
+            setEmployees(employees.filter((emp) => emp.id !== record.id));
+          } else {
+            alert("Error al eliminar: " + data.message);
+          }
+        } catch (error) {
+          console.error("Hubo un error al eliminar el registro: ", error);
+        } finally {
+          setIsDeleteModalVisible(false);
+          setCurrentEmployee(null);
+        }
+      },
+    });
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteModalVisible(false);
+    setCurrentEmployee(null);
+  };
+
+  // Define columns for the table
+  const columns = [
     {
       title: "Consecutivo",
       dataIndex: "id",
@@ -142,41 +189,36 @@ export const EmployeesGrid = () => {
       key: "TotalPayment",
     },
     {
-      title: 'Actualizar',
-      key: 'Actualizar',
+      title: "Actualizar",
+      key: "Actualizar",
       render: (text, record) => (
-        <Button
-          type="link"          
-          onClick={() => handleUpdateClick(record)}
-        >
+        <Button type="link" onClick={() => handleUpdateClick(record)}>
           Actualizar
         </Button>
       ),
     },
     {
-      title: 'Eliminar',
-      key: 'Eliminar',
+      title: "Eliminar",
+      key: "Eliminar",
       render: (text, record) => (
-        <Button
-          type="link"
-          onClick={() => handleDeleteClick(record)}
-        >
+        <Button type="link" onClick={() => handleDeleteClick(record)}>
           Eliminar
         </Button>
       ),
     },
-    // Add more columns as needed
   ];
-
 
   return (
     <div className="employees-grid">
-      
       {/*Fomrulario de ingreso de id empleado, id gerente*/}
       <Employees />
 
       {/* Button to trigger the modal */}
-      <Button type="primary" onClick={showAddModal} style={{ marginBottom: '16px' }}>
+      <Button
+        type="primary"
+        onClick={showAddModal}
+        style={{ marginBottom: "16px" }}
+      >
         Añadir horas extra
       </Button>
 
@@ -199,10 +241,13 @@ export const EmployeesGrid = () => {
           rowKey="id" // Specify the unique key for each row
           //rowKey="ExtraHour" Specify the unique key for each row
           pagination={true} // You can enable pagination if needed
-          onRow={(record) => ({            
+          onRow={(record) => ({
             onClick: () => {
-              console.log('VALOR DE LA FILA: ', JSON.stringify(record, null, 2));  
-              console.log('VALOR DE LA FILA 1: ',record);
+              console.log(
+                "VALOR DE LA FILA: ",
+                JSON.stringify(record, null, 2)
+              );
+              console.log("VALOR DE LA FILA 1: ", record);
               showUpdateModal(record);
             },
           })}
@@ -218,13 +263,23 @@ export const EmployeesGrid = () => {
         onCancel={handleUpdateCancel}
         footer={null} // Optional: Remove default footer if you want custom buttons
       >
-
-        {currentEmployee && ( 
+        {currentEmployee && (
           <>
-          {console.log('CONSOLE LOG DEL MODAL: ',currentEmployee)}     
-          <UpdateExtraHours employee={currentEmployee} />
+            {console.log("CONSOLE LOG DEL MODAL: ", currentEmployee)}
+            <UpdateExtraHours employee={currentEmployee} />
           </>
         )}
+      </Modal>
+      <Modal
+        title="Confirmar eliminación"
+        open={isDeleteModalVisible}
+        onOk={handleDeleteOk}
+        onCancel={handleDeleteCancel}
+      >
+        <p>
+          ¿Estás seguro de que deseas eliminar el registro de{" "}
+          {currentEmployee?.EmployeeName}?
+        </p>
       </Modal>
       <GenerateReport data={employees} />
     </div>

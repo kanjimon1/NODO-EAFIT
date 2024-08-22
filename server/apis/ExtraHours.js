@@ -124,7 +124,7 @@ const updateExtraHours = async (req, res) => {
 
 const deleteExtraHours = async (req, res) => {
   try {
-    const { id, ExtraHour, confirmDelete } = req.params;
+    const { id, confirmDelete } = req.params;
 
     let getExtraHoursInfoJSON = [];
 
@@ -141,7 +141,7 @@ const deleteExtraHours = async (req, res) => {
     if (recordIndex === -1) {
       return res.status(404).send({ error: "Record not found" });
     }
-
+    
     getExtraHoursInfoJSON.splice(recordIndex, 1);
 
     await updateJsonFile("./data/ExtraHours.json", getExtraHoursInfoJSON);
