@@ -1,0 +1,9 @@
+//@import '../utils/variables';
+@use  '../utils' as *;
+//@use  '../utils/variables';
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    //color: $colorbluenavy;
+    color: $colorbluenavy;
+  }
