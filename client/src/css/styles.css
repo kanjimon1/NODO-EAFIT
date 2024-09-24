@@ -147,6 +147,7 @@ a {
 }
 body {
   margin: 0;
+  background-image: url("../../pics/mainBackground.png");
 }
 
 img {
@@ -156,6 +157,16 @@ img {
   margin-left: 100px;
   height: 15px;
   width: 120px;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+  background-image: url("../../pics/mainBackground.png");
 }
 
 #login {
@@ -462,6 +473,7 @@ a {
 
 body {
   margin: 0;
+  background-image: url("../../pics/mainBackground.png");
 }
 
 img {
@@ -471,6 +483,16 @@ img {
   margin-left: 100px;
   height: 15px;
   width: 120px;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+  background-image: url("../../pics/mainBackground.png");
 }
 
 #login {
@@ -660,6 +682,163 @@ body {
   clear: both;
 }
 
+#horasForm article {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  gap: 16px;
+}
+
+#horasForm section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+#horasForm section label,
+#horasForm section input,
+#horasForm section select,
+#horasForm section .ant-picker {
+  grid-column: span 1;
+}
+
+#horasForm section button {
+  grid-column: span 2;
+  justify-self: center;
+  margin-top: 16px;
+}
+
+/*#wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #horas {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  #horasForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  #horasForm .full-width {
+    grid-column: span 2;
+  }*/
+/*#wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+#horas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 50%;
+  max-width: 200px;
+}
+
+#horasForm {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  gap: 16px;
+}
+
+#horasForm button {
+  grid-column: span 2;
+  justify-self: center;
+}*/
+/*#wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    //@include background-image('../../pics/main-background.png');
+    @include background-image($background-image-url);
+}*/
+/*#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 450px;
+    min-width: 320px;
+    margin-right: 2.5rem;
+    margin-bottom: 3rem;
+    background-color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    padding: 1.8rem 3.1rem;
+  }
+
+  .sr-only {
+    font-size: 50px;
+    color: #ffffff;
+  }*/
+/*#login img {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+/*margin-left: auto;
+  margin-right: auto;
+}
+
+#login h2 {
+  margin-top: 0; /* Remove any default margin-top to avoid unnecessary spacing */
+/*font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#login span,
+#login a {
+  margin-top: 10px; /* Adjust the margin as needed */
+/*font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#loginForm label {
+  /*margin-top: 15px;
+  margin-bottom: 10px;*/
+/*font-size: 16px;
+  margin-left: 10;
+}
+
+#loginForm input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+/*margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#loginForm input:hover {
+  background-color: #e6f7ff; /* Light blue */
+/*}*/
+/*#loginForm button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}*/
+/*#loginForm button:hover {
+  background-color: #0056b3;
+}*/
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
@@ -679,6 +858,82 @@ body {
   background-repeat: repeat;
 }
 
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 450px;
+  min-width: 320px;
+  margin-right: 2.5rem;
+  margin-bottom: 3rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  padding: 1.8rem 3.1rem;
+}
+
+.sr-only {
+  font-size: 50px;
+  color: #ffffff;
+}
+
+#login img {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login h2 {
+  margin-top: 0; /* Remove any default margin-top to avoid unnecessary spacing */
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#login span,
+#login a {
+  margin-top: 10px; /* Adjust the margin as needed */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#loginForm label {
+  /*margin-top: 15px;
+  margin-bottom: 10px;*/
+  font-size: 16px;
+  margin-left: 10;
+}
+
+#loginForm input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#loginForm input:hover {
+  background-color: #e6f7ff; /* Light blue */
+}
+
+#loginForm button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#loginForm button:hover {
+  background-color: #0056b3;
+}
+
 main img {
   text-align: center;
   height: 70px;
@@ -690,5 +945,3 @@ main img {
     height: auto;
   }
 }
-
-/*# sourceMappingURL=styles.css.map */

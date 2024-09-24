@@ -1,18 +1,20 @@
 //@use '../utils/index' as *;
-@use '../utils/mixins' as *;
 @use '../utils/variables' as *;
+@use '../utils/mixins' as *;
 
-#wrapper{
+
+/*#wrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100%;
     width: 100%;
-    @include background-image('../../pics/main-background.png');
-}
+    //@include background-image('../../pics/main-background.png');
+    @include background-image($background-image-url);
+}*/
 
-#login {
+/*#login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,31 +32,31 @@
   .sr-only {
     font-size: 50px;
     color: #ffffff;
-  }
+  }*/
   
-  #login img {
+  /*#login img {
     margin-bottom: 10px; /* Adjust the margin as needed */
-    margin-left: auto;
+    /*margin-left: auto;
     margin-right: auto;
   }
   
   #login h2 {
     margin-top: 0; /* Remove any default margin-top to avoid unnecessary spacing */
-    font-size: 30px;
+    /*font-size: 30px;
     margin-bottom: 20px;
   }
   
   #login span,
   #login a {
     margin-top: 10px; /* Adjust the margin as needed */
-    font-size: 16px;
+    /*font-size: 16px;
     margin-bottom: 10px;
   }
   
   #loginForm label {
     /*margin-top: 15px;
     margin-bottom: 10px;*/
-    font-size: 16px;
+    /*font-size: 16px;
     margin-left: 10;
   }
   
@@ -65,15 +67,15 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box; /* Ensure padding doesn't affect total width */
-    margin-top: 15px;
+    /*margin-top: 15px;
     margin-bottom: 10px;
   }
   
   #loginForm input:hover {
     background-color: #e6f7ff; /* Light blue */
-  }
+  /*}*/
   
-  #loginForm button {
+  /*#loginForm button {
     margin-top: 20px;
     padding: 10px;
     font-size: 16px;
@@ -82,8 +84,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+  }*/
   
-  #loginForm button:hover {
+  /*#loginForm button:hover {
     background-color: #0056b3;
-  }
+  }*/

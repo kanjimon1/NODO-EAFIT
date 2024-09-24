@@ -33,14 +33,14 @@ const getEmployeesInfoId = async (req, res) => {
       return res.status(404).send({ message: "Employee not found" });
     }
 
-    // Calcular el valor de la hora laborada (salary / 240)
+    // Calcular el valor de la hora laborada (salary / 240) al mes 240 hrs
     const salary = employee.Salary;
     const hourlyRate = salary / 240;
 
     // Retornar los datos del empleado incluyendo el valor de la hora laborada
     const employeeData = {
       ...employee,
-      hourlyRate: hourlyRate, // Agregar el cálculo del valor de la hora
+      hourlyRate: hourlyRate.toFixed(2), // Agregar el cálculo del valor de la hora
     };
 
     console.log(employeeData);

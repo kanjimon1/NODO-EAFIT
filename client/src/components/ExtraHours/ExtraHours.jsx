@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../pics/login-type-amadeus.png";
 import { Select, DatePicker, Input } from "antd";
 const { Search, TextArea } = Input;

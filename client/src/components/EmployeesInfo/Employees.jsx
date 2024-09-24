@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../pics/login-type-amadeus.png";
 import { Select } from "antd";
+import background from '../../pics/mainBackground.png';
 
 export const Employees = () => {
 
@@ -52,7 +53,7 @@ export const Employees = () => {
   };
   
   return (
-    <div id="wrapper">
+    <div id="wrapper" style={{ backgroundColor: "transparent", minHeight: "100%", width: "100%" }}>
       <h1 className="sr-only">Empleados</h1>
       <div id="horas">
         <img alt="Amadeus" src={logo} />

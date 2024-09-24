@@ -6,6 +6,8 @@ import ExtraHours from "../ExtraHours/ExtraHours";
 import UpdateExtraHours from "../ExtraHours/UpdateExtraHours";
 import GenerateReport from "../GenerateReport/GenerateReport";
 
+import background from '../../pics/mainBackground.png';
+
 export const EmployeesGrid = () => {
   const [employees, setEmployees] = useState([]);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -204,7 +206,14 @@ export const EmployeesGrid = () => {
   ];
 
   return (
-    <div className="employees-grid">
+    <div className="employees-grid" style={{
+      backgroundImage: `url(${background})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "100vh", // ajusta la altura al 100% de la ventana
+      width: "100%", 
+      minHeight: "100vh",// ajusta el ancho al 100% del contenedor
+    }}>
       {/*Fomrulario de ingreso de id empleado, id gerente*/}
       <Employees />
 

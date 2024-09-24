@@ -54,5 +54,13 @@
     "JobName": "SECOPS",
     "Salary": "4000000",
     "Manager": "002"
+  },
+  {
+    "id": 8,
+    "EmployeeId": "E009",
+    "EmployeeName": "Marvin",
+    "JobName": "DEVELOPER",
+    "Salary": "3000000",
+    "Manager": "003"
   }
 ]

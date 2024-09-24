@@ -77,10 +77,10 @@ const updateExtraHours = async (req, res) => {
     const precioFinal1 = Number(precioFinal);
 
     //Calcular el valor total de las extras horas trabajadas
-    const TotalExtraHour = precioFinal1 * amountExtraHours;
+    const TotalExtraHour = precioFinal1.toFixed(2) * amountExtraHours;
 
     //Calcular la suma del salario más el total de la horas extras
-    const TotalPayment = TotalExtraHour + salary;
+    const TotalPayment = TotalExtraHour.toFixed(2) + salary;
 
     //Para setear el tipo de hora de forma string
     let descripcion;
@@ -250,10 +250,10 @@ const addExtraHours = async (req, res) => {
     }
 
     //Calcular el valor total de las extras horas trabajadas
-    const TotalExtraHour = precioFinal * amountExtraHours;
+    const TotalExtraHour = precioFinal.toFixed(2) * amountExtraHours;
 
     //Calcular la suma del salario más el total de la horas extras
-    const TotalPayment = TotalExtraHour + salary;
+    const TotalPayment = TotalExtraHour.toFixed(2) + salary;   
 
     //Para setear el tipo de hora de forma string
     let descripcion;

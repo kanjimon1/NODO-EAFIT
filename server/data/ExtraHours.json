@@ -7,13 +7,13 @@
     "Salary": "6500000",
     "Manager": "003",
     "HourPrice": 27083.333333333332,
-    "Fecha": "2024-08-09T05:00:00.000Z",
-    "ExtraHourType": "25",
-    "TipoHora": "Diurna 25%",
-    "AmountExtraHours": "9",
-    "Comments": "HTHEHEQHEH",
+    "Fecha": "2024-08-10T05:00:00.000Z",
+    "ExtraHourType": 75,
+    "TipoHora": "Diurna Festiva 75%",
+    "AmountExtraHours": 3,
+    "Comments": "HAHAHHA",
     "TotalExtraHour": 60937.5,
-    "TotalPayment": 6560937.5
+    "TotalPayment": "60937.506500000"
   },
   {
     "id": 19,
@@ -46,5 +46,21 @@
     "Comments": "QWERTY AIOSP",
     "TotalExtraHour": 187500,
     "TotalPayment": 5187500
+  },
+  {
+    "id": 22,
+    "EmployeeId": "E007",
+    "EmployeeName": "Cleopatra",
+    "JobName": "SECOPS",
+    "Salary": "4000000",
+    "Manager": "002",
+    "HourPrice": "16666.67",
+    "Fecha": "2024-08-04T05:00:00.000Z",
+    "ExtraHourType": "75",
+    "TipoHora": "Diurna Festiva 75%",
+    "AmountExtraHours": "8",
+    "Comments": "DOMINGO DOMINGO DOMINGO",
+    "TotalExtraHour": 100000,
+    "TotalPayment": "100000.004000000"
   }
 ]

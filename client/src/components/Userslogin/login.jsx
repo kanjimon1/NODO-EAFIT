@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../pics/login-type-amadeus.png';
+import background from '../../pics/mainBackground.png';
 //import '../../scss/';
 
 //esta es una prueba para github
 const Login = () => {
+
+  //const background = 'url("../../pics/mainBackground.png")';
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +49,8 @@ const Login = () => {
   }
 
   return (    
-    <div id="wrapper">
+    <div id="wrapper" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}
+>
       <h1 className="sr-only">Amadeus Service Hub</h1>
       <div id="login">
         {/*<img alt="Amadeus" src="../../pics/login-type-amadeus.png" />*/}
