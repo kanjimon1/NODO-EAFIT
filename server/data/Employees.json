@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "EmployeeId": "E001",
+    "EmployeeName": "Alice Smith",
+    "JobName": "Software Engineer",
+    "Salary": 3000000,
+    "Manager": "001"
+  },
+  {
+    "id": 2,
+    "EmployeeId": "E002",
+    "EmployeeName": "Bob Johnson",
+    "JobName": "Data Analyst",
+    "Salary": 2000000,
+    "Manager": "002"
+  },
+  {
+    "id": 3,
+    "EmployeeId": "E003",
+    "EmployeeName": "Charlie Brown",
+    "JobName": "Project Manager",
+    "Salary": 5000000,
+    "Manager": "001"
+  },
+  {
+    "id": 4,
+    "EmployeeId": "E004",
+    "EmployeeName": "Catalina la Grande",
+    "JobName": "Gerente",
+    "Salary": "6500000",
+    "Manager": "003"
+  },
+  {
+    "id": 5,
+    "EmployeeId": "E005",
+    "EmployeeName": "Camilo Montoya",
+    "JobName": "DBA",
+    "Salary": "6500000",
+    "Manager": "003"
+  },
+  {
+    "id": 6,
+    "EmployeeId": "E006",
+    "EmployeeName": "Alejandro Magno",
+    "JobName": "SRE",
+    "Salary": "8000000",
+    "Manager": "003"
+  },
+  {
+    "id": 7,
+    "EmployeeId": "E007",
+    "EmployeeName": "Cleopatra",
+    "JobName": "SECOPS",
+    "Salary": "4000000",
+    "Manager": "002"
+  },
+  {
+    "id": 8,
+    "EmployeeId": "E009",
+    "EmployeeName": "Marvin",
+    "JobName": "DEVELOPER",
+    "Salary": "3000000",
+    "Manager": "003"
+  }
+]
